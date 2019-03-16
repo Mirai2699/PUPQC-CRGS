@@ -1,0 +1,172 @@
+CREATE DATABASE crgs_v1
+;
+
+CREATE TABLE  r_user_role
+(
+	usr_ID int(10) AUTO_INCREMENT NOT NULL,
+	usr_desc varchar(50) NOT NULL,
+	usr_stat bit(1) NOT NULL,
+	usr_timestamp datetime NOT NULL,
+		Primary key(usr_ID)
+)
+;
+
+CREATE TABLE r_navigation
+(
+	nav_ID int(10) AUTO_INCREMENT NOT NULL,
+	nav_desc varchar(100) NOT NULL,
+	nav_link varchar(100) NOT NULL,
+	nav_class varchar(50) NOT NULL,
+	nav_icon_class varchar(100) NULL,
+	nav_parent int(10) NULL,
+	nav_active_stat varchar(10) DEFAULT "Active" NOT NULL,
+	nav_timestamp datetime NOT NULL,
+		Primary key(nav_ID)
+)
+;
+
+CREATE TABLE f_user_permission
+(
+	per_ID int(10) AUTO_INCREMENT NOT NULL,
+	per_user_ID int(10) NOT NULL,
+	per_user_role int(10) NOT NULL,
+	per_nav_ID int(10) NOT NULL,
+	per_verdict varchar(5) NOT NULL,
+	per_timestamp datetime NOT NULL,
+		Primary key(per_ID),
+		CONSTRAINT FK_userID FOREIGN KEY (per_user_ID)
+		        REFERENCES t_accounts(acc_ID),
+		CONSTRAINT FK_roleID FOREIGN KEY (per_user_role)
+		        REFERENCES r_user_role(usr_ID),
+		CONSTRAINT FK_navID FOREIGN KEY (per_nav_ID)
+		        REFERENCES r_navigation(nav_ID)
+		        
+
+)
+;
+
+CREATE TABLE t_employees
+(
+	emp_ID int(10) AUTO_INCREMENT NOT NULL,
+	emp_lastname varchar(100) NOT NULL,
+	emp_middlename varchar(100) NULL,
+	emp_firstname varchar(100) NOT NULL,
+	emp_position varchar(50) NOT NULL,
+	emp_picture varchar(255) DEFAULT "default.png" NOT NULL ,
+	emp_active_flag bit(1) DEFAULT 1 NOT NULL,
+		Primary key(emp_ID)
+)
+;
+
+CREATE TABLE t_accounts
+(
+	acc_ID int(10) AUTO_INCREMENT NOT NULL,
+	acc_empID int(10) NOT NULL,
+	acc_username varchar(100) NOT NULL,
+	acc_password varchar(100) NOT NULL,
+	acc_user_role int(10) NOT NULL,
+	acc_picture varchar(255) DEFAULT "default.png" NOT NULL ,
+	acc_active_flag bit(1) DEFAULT 1 NOT NULL,
+		Primary key(acc_ID),
+		CONSTRAINT FK_acc_role FOREIGN KEY (acc_user_role)
+    			REFERENCES r_user_role(usr_ID),
+        CONSTRAINT FK_acc_emp FOREIGN KEY (acc_empID)
+    			REFERENCES t_employees(emp_ID)  
+)
+;
+
+CREATE TABLE t_users_log
+(
+	log_No	int(200) AUTO_INCREMENT NOT NULL,
+	log_userID int(10) NOT NULL,
+	log_usertype int(10) NOT NULL,
+	log_datestamp date  NOT NULL,
+	log_timestamp time NOT NULL,
+		Primary key(log_No),
+		CONSTRAINT FK_loguserID FOREIGN KEY (log_userID)
+    			REFERENCES t_accounts(acc_ID) 
+
+)
+;
+
+
+CREATE TABLE r_fund_cluster
+(
+	fc_ID int(10) AUTO_INCREMENT NOT NULL,
+	fc_desc varchar(100) NOT NULL,
+	fc_code varchar(100) NOT NULL,
+	fc_stat varchar(10) DEFAULT "Active" NOT NULL,
+	fc_timestamp datetime NOT NULL,
+		Primary Key(fc_ID)
+	
+);
+
+
+CREATE TABLE r_uacs_type
+(
+	uacs_type_ID int(10) AUTO_INCREMENT NOT NULL,
+	uacs_type_name varchar(100) NOT NULL,
+	uacs_stat varchar(10) DEFAULT "Active" NOT NULL,
+	uacs_timestamp datetime NOT NULL,
+		Primary Key(uacs_type_ID)
+	
+);
+
+
+CREATE TABLE r_uacs
+(
+	uacs_ID int(10) AUTO_INCREMENT NOT NULL,
+	uacs_acc_title varchar(100) NOT NULL,
+	uacs_type int(10) NOT NULL,
+	uacs_acc_code_old varchar(255) NOT NULL,
+	uacs_acc_code_new varchar(255) NOT NULL, 
+	uacs_fund_cluster int(10) NOT NULL,
+	uacs_acc_stat varchar(10) DEFAULT "Active" NOT NULL,
+	uacs_acc_timestamp datetime NOT NULL,
+		Primary key(uacs_ID),
+		CONSTRAINT FK_uacs_type FOREIGN KEY (uacs_type)
+    			REFERENCES r_uacs_type(uacs_type_ID),
+    	CONSTRAINT FK_uacs_fund_cluster FOREIGN KEY (uacs_fund_cluster)
+    			REFERENCES r_fund_cluster(fc_ID)    
+
+
+);
+
+CREATE TABLE t_cr_register_master
+(
+	cr_ID int(10) AUTO_INCREMENT NOT NULL,
+	cr_date_payment date NOT NULL,
+	cr_or_num varchar(20) NOT NULL,
+	cr_payor varchar(200) NOT NULL,
+	cr_receipt DECIMAL(10,2) NOT NULL,
+	cr_dep_nat_treasure DECIMAL(10,2) NULL,
+	cr_dep_agdb DECIMAL(10,2) NULL,
+	cr_balance DECIMAL(10,2) NULL,
+	cr_total_payment DECIMAL(10,2) NOT NULL,
+	cr_stat varchar(10) DEFAULT "Active" NOT NULL,
+	cr_timestamp datetime NOT NULL,
+		Primary key(cr_ID),
+		UNIQUE(cr_or_num)
+);
+
+
+CREATE TABLE t_cr_register_income_references
+(
+	cr_ir_ID int(10) AUTO_INCREMENT NOT NULL,
+	cr_ir_ornum_ref varchar(20) NOT NULL,
+	cr_ir_date_payment date NOT NULL,
+	cr_ir_uac_type_ref int(10) NOT NULL,
+	cr_ir_uac_ID_ref int(10) NOT NULL,
+	cr_ir_amount DECIMAL(10,2) NOT NULL,
+	cr_ir_stat varchar(10) DEFAULT "Active" NOT NULL,
+	cr_ir_timestamp datetime NOT NULL,
+		Primary key(cr_ir_ID),
+		CONSTRAINT FK_ornum FOREIGN KEY (cr_ir_ornum_ref)
+		    	REFERENCES t_cr_register_master(cr_or_num),
+		CONSTRAINT FK_uacs_typeref FOREIGN KEY (cr_ir_uac_type_ref)
+		    	REFERENCES r_uacs_type(uacs_type_ID),
+		CONSTRAINT FK_uacs_ID_ref FOREIGN KEY (cr_ir_uac_ID_ref)
+		    	REFERENCES r_uacs(uacs_ID)    
+);
+
+
