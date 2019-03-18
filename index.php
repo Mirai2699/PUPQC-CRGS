@@ -22,13 +22,13 @@
     <link href="resources/assets/css/default/theme/default.css" rel="stylesheet" id="theme" />
 
     <link href="resources/images/pupqclogo.png" rel="icon"/>
-    <!-- ================== END BASE CSS STYLE ================== -->
+    <!-- ================== END BASE CSS STYLE ================== -->s
     
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="resources/assets/plugins/pace/pace.min.js"></script>
     <!-- ================== END BASE JS ================== -->
 </head>
-<body class="pace-top bg-white">
+<body class="pace-top bg-white" style="background-color: white">
     <!-- begin #page-loader -->
     <div id="page-loader" class="fade show"><span class="spinner"></span></div>
     <!-- end #page-loader -->
@@ -39,7 +39,7 @@
         <div class="login login-with-news-feed">
             <!-- begin news-feed -->
             <div class="news-feed">
-                <div class="news-image" style="background-image: url(resources/images/login-bg-23.jpg)"></div>
+                <div class="news-image" style="background-image: url(resources/images/login-bg-24.jpg)"></div>
                 <div class="news-caption">
                     <h4 class="caption-title"><b>PUPQC</b> Collection Report Generator System</h4>
                     <p>

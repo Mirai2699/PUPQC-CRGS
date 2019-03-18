@@ -28,20 +28,18 @@
           <h4 class="panel-title" style="font-size: 16px">Add Collection  </h4>
         </div>
         <div class="panel-body">
-          <form action="../_func/admin_insert_func.php" method="POST">
+          <form action="../_func/co_add_collection.php" method="POST">
             <!-- FIRST ROW -->
+
+            <p style="font-size: 17px">Today's Date:<br><b> <?php echo date('F d, Y'); ?></b></p>
             <div class="row">
               <div class="col-md-3">
-                  <label>Date:</label>
-                  <input type="text" class="form-control" name="nav_desc" required/>
-              </div>
-              <div class="col-md-3">
                   <label>OR/DS Number</label>
-                  <input type="text" class="form-control" name="nav_link" required/>
+                  <input type="text" class="form-control" name="cr_ornum" required/>
               </div>
               <div class="col-md-4">
                   <label>Payor</label>
-                  <input type="text" class="form-control" name="nav_class" required/>
+                  <input type="text" class="form-control" name="cr_payor" required/>
               </div>
             </div>
             <!-- FIRST ROW -->
@@ -67,76 +65,53 @@
                                  </div>
 
                                  <div class="row group" style="font-size: 15px">      
-                                      <div class="col-md-3">
-                                         <div class="form-group">
-                                             <label>User Account:</label><br>
-                                             <select class="form-control" name="per_acc[]" rqeuired>
-                                               <option value="" selected disabled> -- Select User Account -- </option>
-                                               <?php
-                                                   $view_usr = mysqli_query($connection,"SELECT * FROM `t_accounts` AS ACC 
-                                                                                        INNER JOIN `t_employees` AS EMP 
-                                                                                        ON ACC.acc_empID = EMP.emp_ID");
-                                                   while($ua = mysqli_fetch_array($view_usr))
-                                                   {
-                                                     $acc_ID = $ua["acc_ID"];
-                                                     $acc_un = $ua["acc_username"];
-                                                     $emp_lname = $ua["emp_lastname"];
-                                                     $emp_fname = $ua["emp_firstname"];
-                                                     $emp_compname = $emp_fname.' '.$emp_lname;
-                                               ?>
-                                               <option value="<?php echo $acc_ID?>">UN: <?php echo $acc_un ?>&nbsp; EMP: <?php echo $emp_compname?></option>
-                                               <?php } ?>
-                                             </select>
-                                         </div>
-                                      </div>
                                       <div class="col-md-2">
                                          <div class="form-group">
-                                             <label>User Type:</label><br>
-                                             <select class="form-control" name="per_utype[]" required>
-                                               <option value="" selected disabled> -- Select User Role -- </option>
+                                             <label>Income Type:</label><br>
+                                             <select class="form-control" name="cr_uacs_type[]" required>
+                                               <option value="" selected disabled> -- Select UACS Type -- </option>
                                                <?php
-                                                   $view_usr = mysqli_query($connection,"SELECT * FROM `r_user_role` WHERE usr_stat = 1 ");
+                                                   $view_usr = mysqli_query($connection,"SELECT * FROM `r_uacs_type` WHERE uacs_stat = 'Active' ");
                                                    while($usr = mysqli_fetch_array($view_usr))
                                                    {
-                                                     $usr_ID = $usr["usr_ID"];
-                                                     $usr_desc = $usr["usr_desc"];
+                                                     $uactype_ID = $usr["uacs_type_ID"];
+                                                     $uactype_name = $usr["uacs_type_name"];
                                                ?>
-                                               <option value="<?php echo $usr_ID?>"><?php echo $usr_desc ?></option>
+                                               <option value="<?php echo $uactype_ID?>"><?php echo $uactype_name ?></option>
                                                <?php } ?>
                                              </select>
                                          </div>
                                       </div>
-                                      <div class="col-md-3">
+                                      <div class="col-md-4">
                                          <div class="form-group">
-                                             <label>Navigation:</label><br>
-                                             <select class="form-control" name="per_nav[]" required>
-                                               <option value="" selected disabled> -- Select Navigation -- </option>
+                                             <label>UAC Code / Desc:</label><br>
+                                             <select class="form-control" name="cr_uacs[]" required>
+                                               <option value="" selected disabled> -- Select UACS -- </option>
                                                <?php
-                                                   $view_navs = mysqli_query($connection,"SELECT * FROM `r_navigation` WHERE nav_active_stat = 'Active' ");
-                                                   while($nv = mysqli_fetch_array($view_navs))
+                                                   $view_usr = mysqli_query($connection,"SELECT * FROM `r_uacs` WHERE uacs_acc_stat = 'Active' ");
+                                                   while($usr = mysqli_fetch_array($view_usr))
                                                    {
-                                                     $nv_ID = $nv["nav_ID"];
-                                                     $nv_desc = $nv["nav_desc"];
+                                                     $uac_ID = $usr["uacs_ID"];
+                                                     $uac_title = $usr["uacs_acc_title"];
+                                                     $uac_newcode = $usr["uacs_acc_code_new"];  
+                                                     $uacs_display = '('.$uac_newcode.') &nbsp;&nbsp; - '.$uac_title;
                                                ?>
-                                               <option value="<?php echo $nv_ID?>"><?php echo $nv_desc ?></option>
+                                               <option value="<?php echo $uac_ID?>"><?php echo $uacs_display ?></option>
                                                <?php } ?>
                                              </select>
                                          </div>
                                       </div>
                                       <div class="col-md-2">
                                          <div class="form-group">
-                                             <label>Access Permission:</label><br>
-                                             <select class="form-control" name="per_access[]" required>
-                                                <option value="" selected disabled> -- Select Verdict -- </option>
-                                                <option value="YES">ALLOW</option>
-                                                <option value="NO">DENY</option>
-                                             </select>
+                                             <label>Amount: <small> (In Peso)</small></label><br>
+                                             <input id="amount" type="number" class="form-control" min="1.00" step="0.01" name="cr_amount[]" >
                                          </div>
                                       </div>
+                                     
 
                                       <div class="col-md-1">
                                          <div class="form-group">
-                                             <button type="button" class="btn btn-danger btnRemove" style="margin-top: 40px;">
+                                             <button type="button" class="btn btn-danger btnRemove" style="margin-top: 26px;">
                                               <i class="fa fa-times"></i>
                                             </button>
                                          </div>
@@ -157,28 +132,28 @@
             <div class="row">
               <div class="col-md-2">
                 <label>Receipt</label>
-                <input type="text" class="form-control" name="">
+                <input id="receipt" type="text" class="form-control" name="cr_receipt">
               </div>
               <div class="col-md-2">
                 <label>National Treasure</label>
-                <input type="text" class="form-control" name="">
+                <input type="text" class="form-control" name="cr_treasure">
               </div>
               <div class="col-md-2">
                 <label>AGDB</label>
-                <input type="text" class="form-control" name="">
+                <input type="text" class="form-control" name="cr_agdb">
               </div>
               <div class="col-md-2">
                 <label>Balance</label>
-                <input type="text" class="form-control" name="">
+                <input type="text" class="form-control" name="cr_balance">
               </div>
               <div class="col-md-2">
                 <label>Total:</label>
-                <input type="text" class="form-control" name="">
+                <input id="total" type="text" class="form-control" name="cr_total">
               </div>
               <div class="col-md-2" style="text-align: right">
-                <button type="submit" class="btn btn-success" name="add_navigation" style="font-size: 16px; margin-top: 23px;">
+                <button type="submit" class="btn btn-success" name="add_collection" style="font-size: 16px; margin-top: 23px;">
                   <i class="fa fa-save"></i>
-                  Save
+                  Save Entry
                 </button>
               </div>
             </div>
@@ -196,7 +171,9 @@
   
 
   <!--ON PAGE SCRIPTS-->
-
+   <script type="text/javascript">
+     
+   </script>
    <script src="../../../resources/custom/multi-field/advanced-form.js"></script>
    <script src="../../../resources/custom/multi-field/jquery.multifield.min.js"></script> 
    <script>

@@ -56,7 +56,7 @@
                                                    <div class="row">
                                                        <div class="col-md-12">
                                                                <p> 
-                                                                   <button type="button" id="btnAdd" class="btn btn-info">      
+                                                                   <button type="button" id="btnAdd" class="btn btn-primary">      
                                                                    <i class="fa fa-plus"></i>&nbsp;
                                                                      Add UACS
                                                                    </button>
@@ -64,7 +64,7 @@
                                                        </div>
                                                    </div>
 
-                                                   <div class="row group">      
+                                                   <div class="row group"  style="color: black; font-size: 14px">      
                                                         <div class="col-md-3">
                                                            <div class="form-group">
                                                                <label>Account Title:</label><br>
@@ -74,7 +74,7 @@
                                                         <div class="col-md-2">
                                                            <div class="form-group">
                                                                <label>UACS Type:</label><br>
-                                                               <select class="form-control" name="uac_type[]" required>
+                                                               <select class="form-control" name="uac_type[]" required style="color: black; font-size: 14px">
                                                                  <option value="" selected disabled> -- Select UACS Type -- </option>
                                                                  <?php
                                                                      $view_usr = mysqli_query($connection,"SELECT * FROM `r_uacs_type` WHERE uacs_stat = 'Active' ");
@@ -91,7 +91,7 @@
                                                         <div class="col-md-2">
                                                            <div class="form-group">
                                                                <label>Fund Cluster:</label><br>
-                                                               <select class="form-control" name="uac_fc[]" required>
+                                                               <select class="form-control" name="uac_fc[]" required style="color: black; font-size: 14px">
                                                                  <option value="" selected disabled> -- Select User Role -- </option>
                                                                  <?php
                                                                      $view_usr = mysqli_query($connection,"SELECT * FROM `r_fund_cluster` WHERE fc_stat = 'Active' ");
@@ -108,19 +108,19 @@
                                                         <div class="col-md-2">
                                                            <div class="form-group">
                                                                <label>Old Account Code:</label><br>
-                                                               <input type="text" class="form-control" name="uac_oac[]">
+                                                               <input type="text" class="form-control" name="uac_oac[]" style="color: black; font-size: 14px">
                                                            </div>
                                                         </div>
                                                         <div class="col-md-2">
                                                            <div class="form-group">
                                                                <label>New Account Code:</label><br>
-                                                               <input type="text" class="form-control" name="uac_nac[]">
+                                                               <input type="text" class="form-control" name="uac_nac[]" style="color: black; font-size: 14px">
                                                            </div>
                                                         </div>
 
                                                         <div class="col-md-1">
                                                            <div class="form-group">
-                                                               <button type="button" class="btn btn-danger btnRemove" style="margin-top: 25px;">
+                                                               <button type="button" class="btn btn-danger btnRemove" style="margin-top: 2px;">
                                                                 <i class="fa fa-times"></i>
                                                               </button>
                                                            </div>

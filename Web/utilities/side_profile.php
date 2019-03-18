@@ -5,7 +5,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: url(../../../resources/images/login-bg-23.jpg) no-repeat;
+      background: url(../../../resources/images/login-bg-24.jpg) no-repeat;
       background-size: cover;
   }
 </style>
