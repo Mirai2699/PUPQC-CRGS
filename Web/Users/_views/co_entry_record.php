@@ -104,14 +104,14 @@
                                       <div class="col-md-2">
                                          <div class="form-group">
                                              <label>Amount: <small> (In Peso)</small></label><br>
-                                             <input id="amount" type="number" class="form-control" min="1.00" step="0.01" name="cr_amount[]" >
+                                             <input id="amount" type="number" onkeyup="getTotal()" class="form-control" min="1.00" step="0.01" name="cr_amount[]" >
                                          </div>
                                       </div>
                                      
 
                                       <div class="col-md-1">
                                          <div class="form-group">
-                                             <button type="button" class="btn btn-danger btnRemove" style="margin-top: 26px;">
+                                             <button type="button" onclick="removeRow(this)" class="btn btn-danger" style="margin-top: 26px;">
                                               <i class="fa fa-times"></i>
                                             </button>
                                          </div>
@@ -201,6 +201,22 @@
                   $('input[name=asttypesss]').val($(this).val());            
               });
           });
+
+          function removeRow(btn) {
+            $(btn).closest("div[class='row group']").remove();
+            getTotal();
+          }
+
+          function getTotal() {
+            var total = 0;
+            $.each($("input[id='amount']"), function() {
+              // console.log($(this).val());
+              total = total + Number($(this).val());
+            });
+            console.log(total);
+            $("input[id='total']").val(total);
+          }
+
 
   </script>
   
