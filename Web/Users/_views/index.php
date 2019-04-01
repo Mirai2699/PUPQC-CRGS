@@ -7,6 +7,17 @@
 ?>
     <title>Dashboard | PUPQC-CRGS</title>
     
+    <script src="../../../resources/custom/highcharts/highcharts.js"></script>
+    <script src="../../../resources/custom/highcharts/modules/data.js"></script>
+    <script src="../../../resources/custom/highcharts/modules/exporting.js"></script>
+    <script src="../../../resources/custom/highcharts/modules/drilldown.js"></script>
+
+    <style type="text/css">
+        #I2_box{
+          color: white;
+          font-size: 17px;
+        }
+    </style>
     <!-- begin #content -->
     <div id="content" class="content">
       
@@ -143,34 +154,9 @@
                  }
         ?>
         
-          <!-- begin col-3 -->
-
-            <div class="col-lg-4">
-               <div class="row">
-                       <!-- begin col-8 -->
-                         <div class="col-lg-12">
-                             <div class="widget-chart with-sidebar bg-black">
-                                 <div class="widget-chart-content">
-                                     <h3 class="chart-title">
-                                         Today's Total Collection
-                                         <small>Today's Date: <?php echo date('F d, Y'); ?></small>
-                                     </h3>
-                                     <div id="visitors-line-chart" class="widget-chart-full-width nvd3-inverse-mode" style="height: 100%;">
-                                        <div class="col-md-12">
-                                          <p style="font-size: 40px">
-                                            ₱ <?php echo number_format((float)$total_deposits, 2, '.', '');; ?>
-                                          </p>
-                                        </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                         <!-- end col-8 -->
-               </div>
-            </div>
-            <!-- end col-3 -->
-          
-            <!-- end col-3 -->
+          <!---INCLUDE INDEX 2-->
+           <?php include('../_access_views/get_view_index_2_dashboard.php');?>
+          <!---INCLUDE INDEX 2->
         </div>
         
 

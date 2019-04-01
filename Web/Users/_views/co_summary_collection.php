@@ -25,7 +25,7 @@
 
       <div class="col-md-12" style="background-color: #262626">
         <form method="POST">
-          <label style="color: white; margin: 5px">Action Available:</label>
+          <label style="color: white; margin: 5px;font-size: 17px">Action Available:</label>
           <div class="row" style="margin: 5px">
             <div class="col-md-2">
                 <label style="color: white">From:</label>
@@ -77,7 +77,7 @@
     <!-- end #content -->
   </div>
   <!-- end page container -->
-  <?php include("../_access_views/printable_receipt.php");?>
+  <?php include("../_access_views/printable_summ_collection.php");?>
   <!--ON PAGE SCRIPTS--
   <script>
     $(document).ready(function() {

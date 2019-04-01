@@ -123,7 +123,7 @@
                                                          '$cr_total_payment',
                                                          '$today'
                                                         )";
-              //print_r($insert);  
+            //print_r($insert);  
              mysqli_query($connection,$insert);
 
 

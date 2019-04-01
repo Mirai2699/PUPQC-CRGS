@@ -2,6 +2,19 @@
 <?php
 
       include("../../../db_con.php");
+      include("../_access_views/get_view_details_fund_cluster.php");
+      echo
+      '
+        <p style="font-size: 18px">
+          Cash Receipt Record for the Month of April
+        </p>
+        <div class="panel" style="background-color:#262626; padding:1px"></div>
+      ';
+      $curryear = date('Y');
+      $firstday = date("Y-m-01");
+      $endday = date("t", strtotime($firstday));
+      $displaydate = date("F 01").'-'.$endday.', '.date('Y');
+      
       echo
       ' 
       <style>
@@ -9,9 +22,29 @@
           border: 1px solid black;
           border-collapse: collapse;
         }
+        .borderless{
+          border-bottom: 0px;
+          border-left: 0px;
+          border-right: 0px;
+          border-top:0px;
+          border-collapse: separate;
+        }
       </style>
+      <table class="borderless" style="width: 100%; font-size: 15px">
+        <tr>
+          <td class="borderless" style="width: 70%">Entity Name: <b style="text-decoration: underline;">POLYTECHNIC UNIVERSITY OF THE PHILIPPINES</b></td>
+          <td class="borderless" style="width: 30%">Year: <b style="text-decoration: underline;">'.$curryear.'</b></td>
+        </tr>
+        <tr>
+          <td class="borderless" style="width: 70%">Fund Cluster:<b style="text-decoration: underline;">'.$fc_code.'</b></td>
+          <td class="borderless" style="width: 30%">Period: <b style="text-decoration: underline;">
+            '.$displaydate.'
+          </b></td>
+        </tr>
+      </table>
+      <br>
         <table>
-          <thead>
+          <thead style="text-align:center">
           <tr>
               <th colspan="3">IRYNNE P. GATCHALIAN <br> Accountable Officer</th>
               <th colspan="3">Collecting and Disbursing Officer <br> Official Designation</th>
@@ -33,7 +66,7 @@
             <td rowspan="2">Nature<br> of<br> Collection</td>
             <td rowspan="2">Collection</td>
             <td rowspan="2">Deposit</td>
-            <td rowspan="2" colspan="2">Undeposited<br>Collection</td>
+            <td rowspan="2" colspan="1">Undeposited<br>Collection</td>
             
         </tr>
       ';
@@ -65,23 +98,23 @@
         echo
         '
           <tr>
-              <td rowspan="2">'.$nf_date.'</td>
-              <td rowspan="2">'.$ref_no.'</td>
-              <td rowspan="2">'.$payor.'</td>
-              <td colspan="2"></td>
-              <td rowspan="2">
+              <td rowspan="2" style="width:5%">'.$nf_date.'</td>
+              <td rowspan="2" style="width:5%">'.$ref_no.'</td>
+              <td rowspan="2" style="width:10%">'.$payor.'</td>
+              <td colspan="2" rowspan="2" style="width:5%"></td>
+              <td rowspan="2" style="width:30%">
               '
                    .$crt_nat_col.
               '</td>
-              <td rowspan="2">'.$crt_collection.'</td>
-              <td rowspan="2">'.$crt_deposit.'</td>
-              <td rowspan="2">'.$crt_un_deposit.'</td>
+              <td rowspan="2" style="width:4%">'.$crt_collection.'</td>
+              <td rowspan="2" style="width:4%">'.$crt_deposit.'</td>
+              <td rowspan="2" style="width:4%">'.$crt_un_deposit.'</td>
           </tr>
         ';
         echo
         ' <tr style="text-align: center">
-              <td></td>
-              <td></td>
+              
+
           </tr>
         ';
         

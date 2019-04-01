@@ -24,71 +24,70 @@
       <!-- end page-header -->
       
       <!-- begin panel -->
-      <div class="panel panel-inverse">
-        <div class="panel-heading">
-          <h4 class="panel-title" style="font-size: 16px">Add Navigation</h4>
-        </div>
-        <div class="panel-body">
-          <form action="../_func/admin_insert_func.php" method="POST">
-            <!-- FIRST ROW -->
-            <div class="row">
-              <div class="col-md-3">
-                  <label>Navigation Description</label>
-                  <input type="text" class="form-control" name="nav_desc" required/>
-              </div>
-              <div class="col-md-3">
-                  <label>Navigation Link</label>
-                  <input type="text" class="form-control" name="nav_link" required/>
-              </div>
-              <div class="col-md-2">
-                  <label>Navigation Class</label>
-                  <input type="text" class="form-control" name="nav_class" required/>
-              </div>
-              <div class="col-md-2">
-                  <label>Navigation Icon-Class</label>
-                  <input type="text" class="form-control" name="nav_icon" />
-              </div>
-              <div class="col-md-2">
-                  <label>Navigation Parent (If Child)</label>
-                  <select class="form-control" name="nav_parent">
-                    <option value="" selected disabled> -- Select Parent Nav -- </option>
-                    <?php
-                        $view_navs = mysqli_query($connection,"SELECT * FROM `r_navigation` WHERE nav_active_stat = 'Active' and nav_class = 'has-sub'");
-                        while($nv = mysqli_fetch_array($view_navs))
-                        {
-                          $nv_ID = $nv["nav_ID"];
-                          $nv_desc = $nv["nav_desc"];
-                    ?>
-                    <option value="<?php echo $nv_ID?>"><?php echo $nv_desc ?></option>
-                    <?php } ?>
-                  </select>
-              </div>
-            </div>
-            <!-- FIRST ROW -->
-            <!-- SECOND ROW -->
-            <div class="row">
-              <div class="col-md-12" style="text-align: right">
-                <button type="submit" class="btn btn-primary" name="add_navigation" style="font-size: 16px; margin-top: 10px;">
-                  <i class="fa fa-save"></i>
-                  Save
-                </button>
-              </div>
-            </div>
-            <!-- SECOND ROW -->
-          </form>
-        </div>
-      </div>
+     <div class="col-md-12" style="background-color: #262626">
+       <form method="POST">
+         <label style="color: white; margin: 5px; font-size: 17px">Action Available:</label>
+         <div class="row" style="margin: 5px">
+           <!-- div class="col-md-2">
+               <label style="color: white">From:</label>
+               <input type="date" class="form-control" name="start_date">
+           </div>
+           <div class="col-md-1" style="font-size: 20px">
+             <i class="fa fa-calendar" style="margin-top: 25px; color: white"></i>
+           </div>
+           <div class="col-md-2">
+               <label style="color: white">To:</label>
+               <input type="date" class="form-control" name="end_date">
+           </div> -->
+
+           <div class="col-md-3">
+             <div class="row" style="margin-top: 5px">
+               
+               <button class="btn btn-primary" type="button" onclick="print();">
+                 <i class="fa fa-print"></i>&nbsp;
+                 Print Report
+               </button>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               <button class="btn btn-success" type="button" name="export" style="background-color: green">
+                 <i class="fa fa-file-excel"></i>&nbsp;
+                 Excel Export
+               </button>
+               
+             </div>
+           </div>
+
+           
+         </div>
+       </form>
+       <div class="row" style="padding: 2px"></div>
+     </div>
+     <br>
       <!-- end panel -->
 
       <!-- START TABLE -->
       <div class="panel panel-inverse">
         <div class="panel-heading">
-          <h4 class="panel-title" style="font-size: 16px">Manage Navigation</h4>
+          <h4 class="panel-title" style="font-size: 16px">View Monthly Collection Report</h4>
         </div>
         <div class="panel-body">
-          <!-- FIRST ROW -->
-          <?php include("../_access_views/get_view_table_navigations.php");?>
-          <!-- FIRST ROW -->
+          <style>
+            table, td, th{
+              border: 1px solid black;
+              border-collapse: collapse;
+            }
+            .borderless{
+              border-bottom: 0px;
+              border-left: 0px;
+              border-right: 0px;
+              border-top:0px;
+              border-collapse: separate;
+            }
+          </style>
+          <div class="table-responsive">
+            <!-- FIRST ROW -->
+            <?php include("../_access_views/get_view_table_monthly_collection.php");?>
+            <!-- FIRST ROW -->
+          </div>
         </div>
       </div>
       <!-- END TABLE -->
