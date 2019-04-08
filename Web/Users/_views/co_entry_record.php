@@ -67,8 +67,8 @@
                                  <div class="row group" style="font-size: 15px">      
                                       <div class="col-md-2">
                                          <div class="form-group">
-                                             <label>Income Type:</label><br>
-                                             <select class="form-control" name="cr_uacs_type[]" required>
+                                             <label class="label1">Income Type:</label><br>
+                                             <select class="form-control UAC_TYPE" name="cr_uacs_type[]" required onchange="changeFunction(this,$(this).val())">
                                                <option value="" selected disabled> -- Select UACS Type -- </option>
                                                <?php
                                                    $view_usr = mysqli_query($connection,"SELECT * FROM `r_uacs_type` WHERE uacs_stat = 'Active' ");
@@ -82,10 +82,12 @@
                                              </select>
                                          </div>
                                       </div>
+
                                       <div class="col-md-4">
-                                         <div class="form-group">
+                                        <!-- <label class="label5" style="color:black;">Label5</label> -->
+                                        <div class="form-group">
                                              <label>UAC Code / Desc:</label><br>
-                                             <select class="form-control" name="cr_uacs[]" required>
+                                             <select id="ddItem" class="form-control UAC_DESC" name="cr_uacs[]" required onchange="changeUACAmount(this,$(this).val())">
                                                <option value="" selected disabled> -- Select UACS -- </option>
                                                <?php
                                                    $view_usr = mysqli_query($connection,"SELECT * FROM `r_uacs` WHERE uacs_acc_stat = 'Active' ");
@@ -104,7 +106,8 @@
                                       <div class="col-md-2">
                                          <div class="form-group">
                                              <label>Amount: <small> (In Peso)</small></label><br>
-                                             <input id="amount" type="number" onkeyup="getTotal()" class="form-control" min="1.00" step="0.01" name="cr_amount[]" >
+                                             <input id="amount" type="number" onkeyup="getTotal()" class="form-control UAC_AMOUNT" min="1.00" step="0.01" name="cr_amount[]" readonly="">
+
                                          </div>
                                       </div>
                                      
@@ -132,7 +135,7 @@
             <div class="row">
               <div class="col-md-2">
                 <label>Receipt</label>
-                <input id="receipt" type="text" class="form-control" name="cr_receipt">
+                <input id="total" type="text" class="form-control" name="cr_receipt">
               </div>
               <div class="col-md-2">
                 <label>National Treasure</label>
@@ -176,8 +179,80 @@
    </script>
    <script src="../../../resources/custom/multi-field/advanced-form.js"></script>
    <script src="../../../resources/custom/multi-field/jquery.multifield.min.js"></script> 
-   <script>
 
+   <script type="text/javascript">
+      function changeFunction(OBJECT,val){
+        // alert($(OBJECT).parents().eq(2).find('.label1').text());
+        // $(OBJECT).parents().eq(2).find('.label5').text('Changed');
+        $.ajax({
+          url:'get_income_type.php',
+          type:'POST',
+          data:{
+            category: val, input:'type'
+          },
+          dataType: 'json',
+          success:function(data){
+              // document.getElementById('ddItem').innerHTML = data.option;
+              $(OBJECT).parents().eq(2).find('.UAC_DESC').empty();
+              $(OBJECT).parents().eq(2).find('.UAC_DESC').html(data['option']);
+
+             
+          },
+          error:function(){
+            alert('ERROR');
+          }
+        });
+
+      }
+      
+
+      function changeUACAmount(OBJECT,val){
+        // alert($(OBJECT).parents().eq(2).find('.label1').text());
+        // $(OBJECT).parents().eq(2).find('.label5').text('Changed');
+        $.ajax({
+          url:'get_income_type.php',
+          type:'POST',
+          data:{
+            TypeID: val, input:'amount'
+          },
+          dataType: 'json',
+          success:function(data){
+              // document.getElementById('ddItem').innerHTML = data.option;
+              $(OBJECT).parents().eq(2).find('.UAC_AMOUNT').empty();
+              $(OBJECT).parents().eq(2).find('.UAC_AMOUNT').val(data['amount']);
+              getTotal();
+          },
+          error:function(){
+            alert('ERROR');
+          }
+        });
+
+      }
+      // $('.UAC_TYPE').on('change',function(){
+        // $(this).parents().eq(2).find('.UAC_DESC').val('17').change();
+        // $(this).parents().eq(2).find('.label5').text('Changed');
+      // })
+  </script>
+  <!-- <script type="text/javascript">
+    $(document).ready(function(){
+      setTimeInterval(function(){
+        $.ajax(function(){
+          url:'getTableData.php',
+          type:'GET',
+          async:false,
+          success:function(data){
+            $('#TableBody').empty();
+            $('#tableBody').html(data);
+          },
+          error:function(){
+
+          }
+        });
+      },5000);
+    });
+  </script> -->
+   
+   <script>
           $('.form-content').multifield({
               section: '.group',
               btnAdd:'#btnAdd',
