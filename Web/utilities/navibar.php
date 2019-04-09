@@ -56,7 +56,8 @@
                                                              WHERE PERMIS.per_user_ID = '$curr_sess_user'
                                                              and PERMIS.per_user_role = '$curr_sess_role'
                                                              and PERMIS.per_verdict = 'YES'
-                                                             and NAV.nav_parent = '$nav_ID'");
+                                                             and NAV.nav_parent = '$nav_ID'
+                                                             and NAV.nav_class != 'none'");
                         echo' <ul class="sub-menu">';
                           while($rowsub = mysqli_fetch_array($sub_navi))
                           {

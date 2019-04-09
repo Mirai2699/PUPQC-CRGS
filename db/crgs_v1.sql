@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2019 at 10:52 AM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 5.6.36
+-- Generation Time: Apr 09, 2019 at 12:09 PM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -62,7 +62,9 @@ INSERT INTO `f_user_permission` (`per_ID`, `per_user_ID`, `per_user_role`, `per_
 (18, 2, 2, 17, 'YES', '2019-03-17 18:44:36'),
 (19, 2, 2, 16, 'YES', '2019-03-17 18:44:36'),
 (20, 2, 2, 19, 'YES', '2019-03-17 18:48:13'),
-(21, 2, 2, 20, 'YES', '2019-03-17 18:48:13');
+(21, 2, 2, 20, 'YES', '2019-03-17 18:48:13'),
+(22, 2, 2, 22, 'YES', '2019-04-09 15:38:36'),
+(24, 2, 2, 24, 'YES', '2019-04-09 16:55:17');
 
 -- --------------------------------------------------------
 
@@ -128,7 +130,9 @@ INSERT INTO `r_navigation` (`nav_ID`, `nav_desc`, `nav_link`, `nav_class`, `nav_
 (18, 'Collection Report', '', 'has-sub', 'fa fa-tasks bg-gradient-purple', NULL, 'Active', '2019-03-17 11:35:59'),
 (19, 'Monthly Collection', 'co_monthly_collection.php', 'sub-menu', '', 18, 'Active', '2019-03-17 11:47:22'),
 (20, 'Summary of Collection', 'co_summary_collection.php', 'sub-menu', '', 18, 'Active', '2019-03-17 11:47:49'),
-(21, 'Cash Receipt Report', 'co_cash_report_collection.php', 'sub-menu', '', 18, 'Active', '2019-03-17 11:54:13');
+(21, 'Cash Receipt Report', 'co_cash_report_collection.php', 'sub-menu', '', 18, 'Active', '2019-03-17 11:54:13'),
+(22, 'View Receipts', 'co_view_receipt.php', 'sub-menu', '', 14, 'Active', '2019-04-09 09:38:07'),
+(24, 'Review Receipts', 'co_review_receipt.php', 'none', '', 14, 'Active', '2019-04-09 10:55:06');
 
 -- --------------------------------------------------------
 
@@ -312,6 +316,15 @@ CREATE TABLE `t_cr_register_income_references` (
   `cr_ir_timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `t_cr_register_income_references`
+--
+
+INSERT INTO `t_cr_register_income_references` (`cr_ir_ID`, `cr_ir_ornum_ref`, `cr_ir_date_payment`, `cr_ir_uac_type_ref`, `cr_ir_uac_ID_ref`, `cr_ir_amount`, `cr_ir_stat`, `cr_ir_timestamp`) VALUES
+(1, '3223', '2019-04-09', 1, 1, '150.00', 'Active', '2019-04-09 15:36:17'),
+(2, '3223', '2019-04-09', 1, 2, '300.00', 'Active', '2019-04-09 15:36:17'),
+(3, '2609887', '2019-04-09', 1, 1, '150.00', 'Active', '2019-04-09 18:07:23');
+
 -- --------------------------------------------------------
 
 --
@@ -331,6 +344,14 @@ CREATE TABLE `t_cr_register_master` (
   `cr_stat` varchar(10) NOT NULL DEFAULT 'Active',
   `cr_timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_cr_register_master`
+--
+
+INSERT INTO `t_cr_register_master` (`cr_ID`, `cr_date_payment`, `cr_or_num`, `cr_payor`, `cr_receipt`, `cr_dep_nat_treasure`, `cr_dep_agdb`, `cr_balance`, `cr_total_payment`, `cr_stat`, `cr_timestamp`) VALUES
+(1, '2019-04-09', '3223', 'ako', '450.00', '0.00', '0.00', '0.00', '450.00', 'Active', '2019-04-09 00:00:00'),
+(2, '2019-04-09', '2609887', 'Mirai Kuriyama', '150.00', '0.00', '0.00', '0.00', '150.00', 'Active', '2019-04-09 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -399,7 +420,9 @@ INSERT INTO `t_users_log` (`log_No`, `log_userID`, `log_usertype`, `log_datestam
 (21, 2, 2, '2019-03-18', '16:59:01'),
 (22, 2, 2, '2019-03-23', '16:58:22'),
 (23, 1, 1, '2019-04-08', '13:18:48'),
-(24, 2, 2, '2019-04-08', '13:39:37');
+(24, 2, 2, '2019-04-08', '13:39:37'),
+(25, 1, 1, '2019-04-09', '15:37:14'),
+(26, 1, 1, '2019-04-09', '16:46:30');
 
 --
 -- Indexes for dumped tables
@@ -491,7 +514,7 @@ ALTER TABLE `t_users_log`
 -- AUTO_INCREMENT for table `f_user_permission`
 --
 ALTER TABLE `f_user_permission`
-  MODIFY `per_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `per_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `r_fund_cluster`
@@ -503,7 +526,7 @@ ALTER TABLE `r_fund_cluster`
 -- AUTO_INCREMENT for table `r_navigation`
 --
 ALTER TABLE `r_navigation`
-  MODIFY `nav_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `nav_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `r_uacs`
@@ -533,13 +556,13 @@ ALTER TABLE `t_accounts`
 -- AUTO_INCREMENT for table `t_cr_register_income_references`
 --
 ALTER TABLE `t_cr_register_income_references`
-  MODIFY `cr_ir_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `cr_ir_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `t_cr_register_master`
 --
 ALTER TABLE `t_cr_register_master`
-  MODIFY `cr_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `cr_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `t_employees`
@@ -551,7 +574,7 @@ ALTER TABLE `t_employees`
 -- AUTO_INCREMENT for table `t_users_log`
 --
 ALTER TABLE `t_users_log`
-  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables
