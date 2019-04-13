@@ -22,7 +22,7 @@
     <link href="resources/assets/css/default/theme/default.css" rel="stylesheet" id="theme" />
 
     <link href="resources/images/pupqclogo.png" rel="icon"/>
-    <!-- ================== END BASE CSS STYLE ================== -->s
+    <!-- ================== END BASE CSS STYLE ================== -->
     
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="resources/assets/plugins/pace/pace.min.js"></script>

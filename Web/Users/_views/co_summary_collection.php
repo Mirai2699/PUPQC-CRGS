@@ -5,9 +5,9 @@
   include("../../utilities/BaseJs.php");
   include("../../utilities/Table_Default.php");
 
-?>
-    <title>Setup Navigation | PUPQC-CRGS</title>
-    
+?> 
+    <title>Summary of Collection | PUPQC-CRGS</title>
+   
     <!-- begin #content -->
     <div id="content" class="content">
       <!-- begin breadcrumb -->
@@ -18,92 +18,97 @@
       </ol>
       <!-- end breadcrumb -->
       <!-- begin page-header -->
-      <h1 class="page-header">Configure Navigations <small>Add and Modify</small></h1>
+      <h1 class="page-header">Summary of Collections <small>Filter and Print</small></h1>
       <hr style="background-color: black">
       <!-- end page-header -->
-      
-      <!-- begin panel -->
-      <div class="panel panel-inverse">
-        <div class="panel-heading">
-          <h4 class="panel-title" style="font-size: 16px">Add Navigation</h4>
-        </div>
-        <div class="panel-body">
-          <form action="../_func/admin_insert_func.php" method="POST">
-            <!-- FIRST ROW -->
-            <div class="row">
-              <div class="col-md-3">
-                  <label>Navigation Description</label>
-                  <input type="text" class="form-control" name="nav_desc" required/>
-              </div>
-              <div class="col-md-3">
-                  <label>Navigation Link</label>
-                  <input type="text" class="form-control" name="nav_link" required/>
-              </div>
-              <div class="col-md-2">
-                  <label>Navigation Class</label>
-                  <input type="text" class="form-control" name="nav_class" required/>
-              </div>
-              <div class="col-md-2">
-                  <label>Navigation Icon-Class</label>
-                  <input type="text" class="form-control" name="nav_icon" />
-              </div>
-              <div class="col-md-2">
-                  <label>Navigation Parent (If Child)</label>
-                  <select class="form-control" name="nav_parent">
-                    <option value="" selected disabled> -- Select Parent Nav -- </option>
-                    <?php
-                        $view_navs = mysqli_query($connection,"SELECT * FROM `r_navigation` WHERE nav_active_stat = 'Active' and nav_class = 'has-sub'");
-                        while($nv = mysqli_fetch_array($view_navs))
-                        {
-                          $nv_ID = $nv["nav_ID"];
-                          $nv_desc = $nv["nav_desc"];
-                    ?>
-                    <option value="<?php echo $nv_ID?>"><?php echo $nv_desc ?></option>
-                    <?php } ?>
-                  </select>
-              </div>
+
+      <div class="col-md-12" style="background-color: #262626">
+        <form method="POST">
+          <label style="color: white; margin: 5px">Action Available:</label>
+          <div class="row" style="margin: 5px">
+            <div class="col-md-2">
+                <label style="color: white">From:</label>
+                <input type="date" class="form-control" name="start_date">
             </div>
-            <!-- FIRST ROW -->
-            <!-- SECOND ROW -->
-            <div class="row">
-              <div class="col-md-12" style="text-align: right">
-                <button type="submit" class="btn btn-primary" name="add_navigation" style="font-size: 16px; margin-top: 10px;">
-                  <i class="fa fa-save"></i>
-                  Save
+            <!-- <div class="col-md-1" style="font-size: 20px">
+              <i class="fa fa-calendar" style="margin-top: 25px; color: white"></i>
+            </div> -->
+            <div class="col-md-2">
+                <label style="color: white">To:</label>
+                <input type="date" class="form-control" name="end_date">
+            </div>
+
+            <div class="col-md-3">
+              <div class="row" style="margin-top: 26px">
+                <button class="btn btn-info" type="submit" name="filter_date">
+                  <i class="fa fa-sync"></i>
+                  Filter Report
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary" type="button" onclick="print();">
+                  <i class="fa fa-print"></i>
+                  Print Report
                 </button>
               </div>
             </div>
-            <!-- SECOND ROW -->
-          </form>
-        </div>
-      </div>
-      <!-- end panel -->
 
+            
+          </div>
+        </form>
+        <div class="row" style="padding: 2px"></div>
+      </div>
+      <br>
       <!-- START TABLE -->
       <div class="panel panel-inverse">
         <div class="panel-heading">
-          <h4 class="panel-title" style="font-size: 16px">Manage Navigation</h4>
+          <h4 class="panel-title" style="font-size: 16px">View Summary of Collection</h4>
         </div>
         <div class="panel-body">
           <!-- FIRST ROW -->
-          <?php include("../_access_views/get_view_table_navigations.php");?>
+          <?php include("../_access_views/get_view_table_summary_collection.php");?>
           <!-- FIRST ROW -->
         </div>
       </div>
       <!-- END TABLE -->
+
+
     </div>
     <!-- end #content -->
   </div>
   <!-- end page container -->
   
-
-  <!--ON PAGE SCRIPTS--><!-- 
+  <?php include("../_access_views/printable_summ_collection.php");?>
+  <!--ON PAGE SCRIPTS--
   <script>
     $(document).ready(function() {
-      App.init();
+      //App.init();
+      FormPlugins.init();
     });
   </script> -->
- 
+  <script src="../../../resources/custom/jasonday-printThis-edc43df/printThis.js"></script>
+  <script type="text/javascript">
+    function print()
+    {
+      $('#printable').printThis({
+         debug: false,               // show the iframe for debugging
+         importCSS: true,            // import page CSS
+         importStyle:true,           // import style tags
+         printContainer: true,       // grab outer container as well as the contents of the selector
+         //loadCSS: "",              // path to additional css file - use an array [] for multiple
+         pageTitle: "",              // add title to print page
+         removeInline: false,        // remove all inline styles from print elements
+         printDelay: 333,            // variable print delay
+         header: null,               // prefix to html
+         footer: "",               // postfix to html
+         base: false ,               // preserve the BASE tag, or accept a string for the URL
+         formValues: true,           // preserve input/form values
+         canvas: false,              // copy canvas elements (experimental)
+         doctypeString: null,        // enter a different doctype for older markup
+         removeScripts: false,       // remove script tags from print content
+         copyTagClasses: false       // copy classes from the html & body tag
+       });
+    }
+  </script>
   <!--ON PAGE SCRIPTS-->
 </body>
 </html>

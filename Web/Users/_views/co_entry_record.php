@@ -106,7 +106,7 @@
                                       <div class="col-md-2">
                                          <div class="form-group">
                                              <label>Amount: <small> (In Peso)</small></label><br>
-                                             <input id="amount" type="number" onkeyup="getTotal()" class="form-control UAC_AMOUNT" min="1.00" step="0.01" name="cr_amount[]" readonly="">
+                                             <input id="amount" type="number" onkeyup="getTotal()" class="form-control UAC_AMOUNT" min="1.00" step="0.01" name="cr_amount[]">
 
                                          </div>
                                       </div>
@@ -114,7 +114,7 @@
 
                                       <div class="col-md-1">
                                          <div class="form-group">
-                                             <button type="button" onclick="removeRow(this)" class="btn btn-danger" style="margin-top: 26px;">
+                                             <button type="button" onclick="removeRow(this)" class="btn btn-danger" style="margin-top: 30px;">
                                               <i class="fa fa-times"></i>
                                             </button>
                                          </div>
