@@ -3,14 +3,22 @@
     //TRIGGERS
        if(isset($_POST['add_collection']))
        { 
-          add_collection_summary();
-          add_collection_particulars();
+          require('../../../db_con.php');
+         // add_collection_summary();
+          //add_collection_particulars();
+          //update_or_stat();
+
+          $get_max = mysqli_query($connection, "SELECT MAX(cr_ID) AS LAST FROM `t_cr_register_master`");
+          while($row = mysqli_fetch_assoc($get_max))
+          {
+            $last_ID = $row['LAST'];
+          }
 
           echo "<script type=\"text/javascript\">".
                    "alert
                    ('You have successfully recorded a collection.');".
                   "</script>";
-          echo "<script>setTimeout(\"location.href = '../_views/co_entry_record.php';\",0);</script>";
+          echo "<script>setTimeout(\"location.href = '../_views/co_review_receipt.php?get_ID=$last_ID;\",0);</script>";
        }
 
        else if(isset($_POST['add_navigation']))
@@ -22,7 +30,14 @@
 
       
      //FUNCTIONS
-       
+        function update_or_stat()
+        {
+            require('../../../db_con.php');
+            $cr_ornum = $_POST['cr_ornum'];
+
+            $update = "UPDATE `r_official_receipt` SET or_status = 'PAID' WHERE or_no = '$cr_ornum'";
+            mysqli_query($connection, $update);
+        }
         function add_collection_summary()
         { 
             require('../../../db_con.php');

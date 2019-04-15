@@ -33,13 +33,22 @@
 
             <p style="font-size: 17px">Today's Date:<br><b> <?php echo date('F d, Y'); ?></b></p>
             <div class="row">
+              <?php
+                $currmonth = date('m');
+                $select_or = mysqli_query($connection, "SELECT or_no FROM `r_official_receipt` WHERE month(or_create_date) = '4' and or_status = 'PENDING' LIMIT 1");
+                while($row = mysqli_fetch_assoc($select_or))
+                {
+                  $or_num = $row['or_no'];
+                }
+
+              ?>
               <div class="col-md-3">
                   <label>OR/DS Number</label>
-                  <input type="text" class="form-control" name="cr_ornum" required/>
+                  <input type="text" class="form-control" name="cr_ornum" style="font-size: 15px; color: black; font-weight: bold" readonly value="<?php echo $or_num;?>" required/>
               </div>
               <div class="col-md-4">
                   <label>Payor</label>
-                  <input type="text" class="form-control" name="cr_payor" required/>
+                  <input type="text" class="form-control" name="cr_payor" style="font-size: 15px; color: black" required/>
               </div>
             </div>
             <!-- FIRST ROW -->

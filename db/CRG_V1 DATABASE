@@ -132,6 +132,17 @@ CREATE TABLE r_uacs
 
 );
 
+CREATE TABLE r_official_receipt
+(
+ 	or_ID int(10) AUTO_INCREMENT NOT NULL,
+ 	or_no varchar(20) NOT NULL,
+ 	or_status varchar(20) DEFAULT "PENDING" NOT NULL,
+ 	or_create_date date NOT NULL, 
+ 		Primary key(or_ID),
+ 		UNIQUE(or_no)
+
+);
+
 CREATE TABLE t_cr_register_master
 (
 	cr_ID int(10) AUTO_INCREMENT NOT NULL,
@@ -146,7 +157,8 @@ CREATE TABLE t_cr_register_master
 	cr_stat varchar(10) DEFAULT "Active" NOT NULL,
 	cr_timestamp datetime NOT NULL,
 		Primary key(cr_ID),
-		UNIQUE(cr_or_num)
+		CONSTRAINT FK_or_number FOREIGN KEY (cr_or_num)
+		    	REFERENCES r_official_receipt(or_no)
 );
 
 
