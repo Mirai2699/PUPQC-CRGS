@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2019 at 11:31 AM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 5.6.36
+-- Generation Time: Apr 16, 2019 at 03:04 PM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -66,7 +66,30 @@ INSERT INTO `f_user_permission` (`per_ID`, `per_user_ID`, `per_user_role`, `per_
 (22, 2, 2, 22, 'YES', '2019-04-09 15:38:36'),
 (24, 2, 2, 24, 'YES', '2019-04-09 16:55:17'),
 (25, 2, 2, 25, 'YES', '2019-04-15 12:54:48'),
-(26, 2, 2, 26, 'YES', '2019-04-15 13:29:54');
+(26, 2, 2, 26, 'YES', '2019-04-15 13:29:54'),
+(27, 2, 2, 27, 'YES', '2019-04-16 19:22:14'),
+(28, 2, 2, 28, 'YES', '2019-04-16 19:22:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `r_deposit_account`
+--
+
+CREATE TABLE `r_deposit_account` (
+  `dpac_ID` int(10) NOT NULL,
+  `dpac_acc_no` varchar(20) NOT NULL,
+  `dpac_bank` varchar(255) NOT NULL,
+  `dpac_starting_count` int(10) NOT NULL,
+  `dpac_mod_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `r_deposit_account`
+--
+
+INSERT INTO `r_deposit_account` (`dpac_ID`, `dpac_acc_no`, `dpac_bank`, `dpac_starting_count`, `dpac_mod_date`) VALUES
+(1, '0682102047', 'LBP', 2, '2019-04-16');
 
 -- --------------------------------------------------------
 
@@ -136,7 +159,9 @@ INSERT INTO `r_navigation` (`nav_ID`, `nav_desc`, `nav_link`, `nav_class`, `nav_
 (22, 'View Receipts', 'co_view_receipt.php', 'sub-menu', '', 14, 'Active', '2019-04-09 09:38:07'),
 (24, 'Review Receipts', 'co_review_receipt.php', 'none', '', 14, 'Active', '2019-04-09 10:55:06'),
 (25, 'Deposits', '', 'has-sub', 'ion-archive bg-gradient-red', NULL, 'Active', '2019-04-15 06:54:27'),
-(26, 'OR Setup', 'co_setup_or.php', 'has-sub', 'ion-ios-list bg-gradient-aqua', NULL, 'Active', '2019-04-15 07:31:50');
+(26, 'OR Setup', 'co_setup_or.php', 'has-sub', 'ion-ios-list bg-gradient-aqua', NULL, 'Active', '2019-04-15 07:31:50'),
+(27, 'Pending', 'co_deposit_pending.php', 'sub-menu', '', 25, 'Active', '2019-04-16 01:20:16'),
+(28, 'Deposited', 'co_deposit_done.php', 'sub-menu', '', 25, 'Active', '2019-04-16 01:20:48');
 
 -- --------------------------------------------------------
 
@@ -161,8 +186,8 @@ INSERT INTO `r_official_receipt` (`or_ID`, `or_no`, `or_status`, `or_create_date
 (3, '062703', 'PAID', '2019-04-01'),
 (4, '062704', 'PAID', '2019-04-01'),
 (5, '062705', 'PAID', '2019-04-01'),
-(6, '062706', 'PENDING', '2019-04-01'),
-(7, '062707', 'PENDING', '2019-04-01'),
+(6, '062706', 'PAID', '2019-04-01'),
+(7, '062707', 'PAID', '2019-04-01'),
 (8, '062708', 'PENDING', '2019-04-01'),
 (9, '062709', 'PENDING', '2019-04-01'),
 (10, '0627010', 'PENDING', '2019-04-01'),
@@ -408,7 +433,11 @@ INSERT INTO `t_cr_register_income_references` (`cr_ir_ID`, `cr_ir_ornum_ref`, `c
 (3, '062704', '2019-04-15', 1, 2, '300.00', 'Active', '2019-04-15 15:05:39'),
 (4, '062704', '2019-04-15', 3, 3, '60.00', 'Active', '2019-04-15 15:05:39'),
 (5, '062704', '2019-04-15', 3, 4, '50.00', 'Active', '2019-04-15 15:05:39'),
-(6, '062705', '2019-04-15', 1, 1, '150.00', 'Active', '2019-04-15 15:12:50');
+(6, '062705', '2019-04-15', 1, 1, '150.00', 'Active', '2019-04-15 15:12:50'),
+(7, '062706', '2019-04-16', 1, 1, '150.00', 'Active', '2019-04-16 13:43:32'),
+(8, '062706', '2019-04-16', 4, 67, '240.00', 'Active', '2019-04-16 13:43:32'),
+(9, '062707', '2019-04-16', 2, 50, '620.75', 'Active', '2019-04-16 13:46:07'),
+(10, '062707', '2019-04-16', 3, 48, '350.00', 'Active', '2019-04-16 13:46:07');
 
 -- --------------------------------------------------------
 
@@ -437,7 +466,32 @@ CREATE TABLE `t_cr_register_master` (
 INSERT INTO `t_cr_register_master` (`cr_ID`, `cr_date_payment`, `cr_or_num`, `cr_payor`, `cr_receipt`, `cr_dep_nat_treasure`, `cr_dep_agdb`, `cr_balance`, `cr_total_payment`, `cr_stat`, `cr_timestamp`) VALUES
 (1, '2019-04-15', '062703', 'Cristian Balatbat', '5150.00', '0.00', '0.00', '0.00', '5150.00', 'Active', '2019-04-15 00:00:00'),
 (2, '2019-04-15', '062704', 'Clark Ian Woods', '410.00', '0.00', '0.00', '0.00', '410.00', 'Active', '2019-04-15 00:00:00'),
-(3, '2019-04-15', '062705', 'Lowell Dave Agnir', '150.00', '0.00', '0.00', '0.00', '150.00', 'Active', '2019-04-15 00:00:00');
+(3, '2019-04-15', '062705', 'Lowell Dave Agnir', '150.00', '0.00', '0.00', '0.00', '150.00', 'Active', '2019-04-15 00:00:00'),
+(4, '2019-04-16', '062706', 'Mirai Kuriyama', '390.00', '0.00', '0.00', '0.00', '390.00', 'Active', '2019-04-16 00:00:00'),
+(5, '2019-04-16', '062707', 'Vince Martin', '970.75', '0.00', '0.00', '0.00', '970.75', 'Active', '2019-04-16 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_deposits`
+--
+
+CREATE TABLE `t_deposits` (
+  `dep_ID` int(10) NOT NULL,
+  `dep_acc_no` varchar(20) NOT NULL,
+  `dep_slip_no` varchar(20) NOT NULL,
+  `dep_amount` decimal(10,2) NOT NULL,
+  `dep_status` varchar(20) NOT NULL,
+  `dep_date_for` date NOT NULL,
+  `dep_date_actual` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_deposits`
+--
+
+INSERT INTO `t_deposits` (`dep_ID`, `dep_acc_no`, `dep_slip_no`, `dep_amount`, `dep_status`, `dep_date_for`, `dep_date_actual`) VALUES
+(1, '0682102047', '2019-001', '1360.75', 'PENDING', '2019-04-16', NULL);
 
 -- --------------------------------------------------------
 
@@ -521,7 +575,10 @@ INSERT INTO `t_users_log` (`log_No`, `log_userID`, `log_usertype`, `log_datestam
 (36, 2, 2, '2019-04-15', '13:32:12'),
 (37, 1, 1, '2019-04-15', '16:11:09'),
 (38, 2, 2, '2019-04-15', '16:11:41'),
-(39, 2, 2, '2019-04-15', '16:14:31');
+(39, 2, 2, '2019-04-15', '16:14:31'),
+(40, 2, 2, '2019-04-16', '13:13:10'),
+(41, 1, 1, '2019-04-16', '19:17:54'),
+(42, 2, 2, '2019-04-16', '21:01:02');
 
 --
 -- Indexes for dumped tables
@@ -535,6 +592,13 @@ ALTER TABLE `f_user_permission`
   ADD KEY `FK_userID` (`per_user_ID`),
   ADD KEY `FK_roleID` (`per_user_role`),
   ADD KEY `FK_navID` (`per_nav_ID`);
+
+--
+-- Indexes for table `r_deposit_account`
+--
+ALTER TABLE `r_deposit_account`
+  ADD PRIMARY KEY (`dpac_ID`),
+  ADD UNIQUE KEY `dpac_acc_no` (`dpac_acc_no`);
 
 --
 -- Indexes for table `r_fund_cluster`
@@ -600,6 +664,13 @@ ALTER TABLE `t_cr_register_master`
   ADD KEY `FK_or_number` (`cr_or_num`);
 
 --
+-- Indexes for table `t_deposits`
+--
+ALTER TABLE `t_deposits`
+  ADD PRIMARY KEY (`dep_ID`),
+  ADD KEY `FK_acc_no` (`dep_acc_no`);
+
+--
 -- Indexes for table `t_employees`
 --
 ALTER TABLE `t_employees`
@@ -620,7 +691,13 @@ ALTER TABLE `t_users_log`
 -- AUTO_INCREMENT for table `f_user_permission`
 --
 ALTER TABLE `f_user_permission`
-  MODIFY `per_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `per_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `r_deposit_account`
+--
+ALTER TABLE `r_deposit_account`
+  MODIFY `dpac_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `r_fund_cluster`
@@ -632,7 +709,7 @@ ALTER TABLE `r_fund_cluster`
 -- AUTO_INCREMENT for table `r_navigation`
 --
 ALTER TABLE `r_navigation`
-  MODIFY `nav_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `nav_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `r_official_receipt`
@@ -668,13 +745,19 @@ ALTER TABLE `t_accounts`
 -- AUTO_INCREMENT for table `t_cr_register_income_references`
 --
 ALTER TABLE `t_cr_register_income_references`
-  MODIFY `cr_ir_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `cr_ir_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `t_cr_register_master`
 --
 ALTER TABLE `t_cr_register_master`
-  MODIFY `cr_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cr_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `t_deposits`
+--
+ALTER TABLE `t_deposits`
+  MODIFY `dep_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t_employees`
@@ -686,7 +769,7 @@ ALTER TABLE `t_employees`
 -- AUTO_INCREMENT for table `t_users_log`
 --
 ALTER TABLE `t_users_log`
-  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- Constraints for dumped tables
@@ -727,6 +810,12 @@ ALTER TABLE `t_cr_register_income_references`
 --
 ALTER TABLE `t_cr_register_master`
   ADD CONSTRAINT `FK_or_number` FOREIGN KEY (`cr_or_num`) REFERENCES `r_official_receipt` (`or_no`);
+
+--
+-- Constraints for table `t_deposits`
+--
+ALTER TABLE `t_deposits`
+  ADD CONSTRAINT `FK_acc_no` FOREIGN KEY (`dep_acc_no`) REFERENCES `r_deposit_account` (`dpac_acc_no`);
 
 --
 -- Constraints for table `t_users_log`

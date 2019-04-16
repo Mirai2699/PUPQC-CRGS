@@ -4,9 +4,9 @@
        if(isset($_POST['add_collection']))
        { 
           require('../../../db_con.php');
-         // add_collection_summary();
-          //add_collection_particulars();
-          //update_or_stat();
+          add_collection_summary();
+          add_collection_particulars();
+          update_or_stat();
 
           $get_max = mysqli_query($connection, "SELECT MAX(cr_ID) AS LAST FROM `t_cr_register_master`");
           while($row = mysqli_fetch_assoc($get_max))
@@ -18,7 +18,7 @@
                    "alert
                    ('You have successfully recorded a collection.');".
                   "</script>";
-          echo "<script>setTimeout(\"location.href = '../_views/co_review_receipt.php?get_ID=$last_ID;\",0);</script>";
+          echo "<script>setTimeout(\"location.href = '../_views/co_review_receipt.php?getID=$last_ID';\",0);</script>";
        }
 
        else if(isset($_POST['add_navigation']))

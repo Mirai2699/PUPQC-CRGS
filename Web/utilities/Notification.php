@@ -155,6 +155,7 @@
               Inbox
             </a> -->
             <a href="javascript:;" class="dropdown-item">Change Password</a>
+            <a href="#" class="dropdown-item">Lock Screen</a>
             <div class="dropdown-divider"></div>
             <a href="../../../logout.php" class="dropdown-item">Log Out</a>
           </div>

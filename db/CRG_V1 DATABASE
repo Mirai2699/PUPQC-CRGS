@@ -181,4 +181,28 @@ CREATE TABLE t_cr_register_income_references
 		    	REFERENCES r_uacs(uacs_ID)    
 );
 
+CREATE TABLE r_deposit_account
+(
+	dpac_ID int(10) AUTO_INCREMENT NOT NULL,
+	dpac_acc_no varchar(20) NOT NULL,
+	dpac_bank varchar(255) NOT NULL,
+	dpac_mod_date date NOT NULL,
+		Primary key(dpac_ID),
+		UNIQUE(dpac_acc_no)
+);
 
+
+CREATE TABLE t_deposits
+(
+	dep_ID int(10) AUTO_INCREMENT NOT NULL,
+	dep_acc_no varchar(20) NOT NULL,
+	dep_slip_no varchar(20) NOT NULL,
+	dep_amount DECIMAL(10,2) NOT NULL,	
+	dep_status varchar(20) NOT NULL,
+	dep_date_for date NOT NULL,
+	dep_date_actual date NULL,
+		Primary key(dep_ID),
+		CONSTRAINT FK_acc_no FOREIGN KEY (dep_acc_no)
+		    	REFERENCES r_deposit_account(dpac_acc_no)
+
+);
