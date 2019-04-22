@@ -44,4 +44,4 @@
 </table>
 
 <!--MODAL INCLUDES-->
-<?php include("../_access_views/get_view_modal_edit_navigations.php");?>
+

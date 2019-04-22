@@ -1,11 +1,12 @@
 <?php 
   include("../../utilities/header.php");
+  include("../../utilities/title_display.php");
   include("../../utilities/Notification.php");
   include("../../utilities/navibar.php");
   include("../../utilities/BaseJs.php");
   include("../../utilities/Table_Default.php");
 ?>
-    <title>Setup Offical Receipt | PUPQC-CRGS</title>
+   <title><?php echo $title_name; ?> | PUPQC-CRGS</title>
     
     <!-- begin #content -->
     <div id="content" class="content">

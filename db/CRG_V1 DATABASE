@@ -45,6 +45,18 @@ CREATE TABLE f_user_permission
 )
 ;
 
+CREATE TABLE f_lock_screen_log
+(
+	ls_ID int(10) AUTO_INCREMENT NOT NULL,
+	ls_page varchar(200) NOT NULL,
+	ls_acc_ID int(10) NOT NULL,
+	ls_timestamp datetime NOT NULL,
+		Primary key(ls_ID),
+		CONSTRAINT FK_lsuserID FOREIGN KEY (ls_acc_ID)
+    			REFERENCES t_accounts(acc_ID) 
+
+);
+
 CREATE TABLE t_employees
 (
 	emp_ID int(10) AUTO_INCREMENT NOT NULL,
@@ -205,4 +217,55 @@ CREATE TABLE t_deposits
 		CONSTRAINT FK_acc_no FOREIGN KEY (dep_acc_no)
 		    	REFERENCES r_deposit_account(dpac_acc_no)
 
+);
+
+CREATE TABLE t_accountable_forms_wfv
+(
+	af_wfv_ID int(10) AUTO_INCREMENT NOT NULL,
+	af_wfv_no varchar(10) NOT NULL,
+	af_wfv_bb_qty int(10) NOT NULL,
+	af_wfv_bb_from varchar(20) NOT NULL,
+	af_wfv_bb_to varchar(20) NOT NULL,
+	af_wfv_rec_qty int(10) NULL,
+	af_wfv_rec_from varchar(20) NULL,
+	af_wfv_rec_to varchar(20) NULL,
+	af_wfv_iss_qty int(10) NOT NULL,
+	af_wfv_iss_from varchar(20) NOT NULL,
+	af_wfv_iss_to varchar(20) NOT NULL,
+	af_wfv_eb_qty int(10) NULL,
+	af_wfv_eb_from varchar(20) NOT NULL,
+	af_wfv_eb_to varchar(20) NOT NULL,
+	af_wfv_person_in_charge int(10) NOT NULL,
+	af_wfv_datestamp date NOT NULL,
+	af_wfv_active_stat varchar(10) NOT NULL,
+		Primary key(af_wfv_ID),
+		UNIQUE(af_wfv_no),
+		CONSTRAINT FK_acC_ID FOREIGN KEY(af_wfv_person_in_charge)
+			REFERENCES t_accounts(acc_ID)
+);
+
+CREATE TABLE t_accountable_forms_fv
+(
+	af_fv_ID int(10) AUTO_INCREMENT NOT NULL,
+	af_fv_no varchar(10) NOT NULL,
+	af_fv_face_value int(10) NOT NULL,
+	af_fv_bb_qty int(10) NOT NULL,
+	af_fv_bb_from varchar(20) NOT NULL,
+	af_fv_bb_to varchar(20) NOT NULL,
+	af_fv_rec_qty int(10) NULL,
+	af_fv_rec_from varchar(20) NULL,
+	af_fv_rec_to varchar(20) NULL,
+	af_fv_iss_qty int(10) NOT NULL,
+	af_fv_iss_from varchar(20) NOT NULL,
+	af_fv_iss_to varchar(20) NOT NULL,
+	af_fv_eb_qty int(10) NULL,
+	af_fv_eb_from varchar(20) NOT NULL,
+	af_fv_eb_to varchar(20) NOT NULL,
+	af_fv_person_in_charge int(10) NOT NULL,
+	af_fv_datestamp date NOT NULL,
+	af_fv_active_stat varchar(10) NOT NULL,
+		Primary key(af_fv_ID),
+		UNIQUE(af_fv_no),
+		CONSTRAINT FK_fv_acC_ID FOREIGN KEY(af_fv_person_in_charge)
+			REFERENCES t_accounts(acc_ID)
 );

@@ -82,7 +82,10 @@
                          
                         <div class="login-buttons" style="margin-bottom: 30px">
                            <!--  <button name="login" type="submit" class="btn btn-success btn-block btn-lg">Log In</button> -->
-                           <button type="submit" name="login" class="btn btn-success btn-block btn-lg">Log In</button>
+                           <button type="submit" name="login" class="btn btn-success btn-block btn-lg">
+                                
+                                Log In
+                            </button>
                           
                         </div>
                         <hr>

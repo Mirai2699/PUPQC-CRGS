@@ -1,12 +1,13 @@
 <?php 
   include("../../utilities/header.php");
+  include("../../utilities/title_display.php");
   include("../../utilities/Notification.php");
   include("../../utilities/navibar.php");
   include("../../utilities/BaseJs.php");
   include("../../utilities/Table_Default.php");
 
 ?>
-    <title>Add Collection Record | PUPQC-CRGS</title>
+    <title><?php echo $title_name; ?> | PUPQC-CRGS</title>
     
     <!-- begin #content -->
     <div id="content" class="content">
@@ -144,9 +145,9 @@
             <div class="row">
               <div class="col-md-2">
                 <label>Receipt</label>
-                <input id="total" type="text" class="form-control" name="cr_receipt">
+                <input id="total" type="text" class="form-control" name="cr_receipt" readonly style="color: black; font-size: 18px; font-weight: bold" />
               </div>
-              <div class="col-md-2">
+             <!--  <div class="col-md-2">
                 <label>National Treasure</label>
                 <input type="text" class="form-control" name="cr_treasure">
               </div>
@@ -157,13 +158,13 @@
               <div class="col-md-2">
                 <label>Balance</label>
                 <input type="text" class="form-control" name="cr_balance">
-              </div>
+              </div> -->
               <div class="col-md-2">
                 <label>Total:</label>
-                <input id="total" type="text" class="form-control" name="cr_total">
+                <input id="total" type="text" class="form-control" name="cr_total" readonly style="color: black; font-size: 18px; font-weight: bold" />
               </div>
               <div class="col-md-2" style="text-align: right">
-                <button type="submit" class="btn btn-success" name="add_collection" style="font-size: 16px; margin-top: 23px;">
+                <button type="submit" class="btn btn-success" name="add_collection" style="font-size: 16px; margin-top: 23px; background-color: green">
                   <i class="fa fa-save"></i>
                   Save Entry
                 </button>

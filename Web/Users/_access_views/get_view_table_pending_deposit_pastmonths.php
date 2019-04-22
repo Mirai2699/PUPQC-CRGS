@@ -1,5 +1,4 @@
-
-<table id="data-table-select" class="table table-striped table-bordered" style="font-size: 15px">
+<table id="data-table-default" class="table table-striped table-bordered" style="font-size: 15px">
   <thead>
   <tr>
       <th class="hidden">ID</th>
@@ -16,7 +15,7 @@
       $currmonth = date('m');
       $view_query1 = mysqli_query($connection,"SELECT * FROM `t_deposits` 
                                               WHERE dep_status = 'PENDING'
-                                              and month(dep_date_for) = '$currmonth'
+                                              and month(dep_date_for) != '$currmonth'
                                               ORDER BY dep_ID  DESC");
       while($row1 = mysqli_fetch_assoc($view_query1))
       {
@@ -47,4 +46,3 @@
 </table>
 
 <!--MODAL INCLUDES-->
-

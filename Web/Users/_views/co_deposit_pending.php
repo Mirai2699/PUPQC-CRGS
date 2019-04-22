@@ -1,12 +1,13 @@
 <?php 
   include("../../utilities/header.php");
+  include("../../utilities/title_display.php");
   include("../../utilities/Notification.php");
   include("../../utilities/navibar.php");
   include("../../utilities/BaseJs.php");
   include("../../utilities/Table_Default.php");
 
 ?>
-    <title>Pending Deposits | PUPQC-CRGS</title>
+   <title><?php echo $title_name; ?> | PUPQC-CRGS</title>
     
     <!-- begin #content -->
     <div id="content" class="content">
@@ -22,7 +23,35 @@
       <hr style="background-color: black">
       <!-- end page-header -->
       
-      
+      <!--INCASE OF FORGOTTEN-->
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <h4 class="panel-title" style="font-size: 16px">Create Deposit Slip Record</h4>
+        </div>
+        <div class="panel-body">
+            <p style="font-size: 16px; ">
+              Note: This form is only applicable to use if the deposit slip from yesterday, or from the other day was not created.
+            </p>
+            <div class="col-md-12">
+              <form action="../_func/co_add_deposit.php" method="POST">
+                <div class="row" style="font-size: 15px">
+                  <div class="col-md-3">
+                      <label>Date of Collection for Deposit Slip:</label>
+                      <input type="date" name="date_deposit" class="form-control" max="<?php echo date('Y-m-d');?>" style="font-size: 15px" required>
+                  </div>
+                  <div class="col-md-1">
+                    <button type="submit" class="btn btn-success" name="deposit_otherday" style="font-size: 15px; margin-top: 29px">
+                      <i class="ion-archive"></i>
+                      Create Deposit Slip Record
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+        </div>
+      </div>
+      <!-- IN CASE FORGOTTEN -->
+
       <!-- START TABLE -->
       <div class="panel panel-inverse">
         <div class="panel-heading">
@@ -51,7 +80,7 @@
               <div class="tab-content" style="border: 1px solid lightgray;">
                 <!-- begin tab-pane -->
                 <div class="tab-pane fade active show" id="default-tab-1">
-                  <h3 class="m-t-10"><i class="fa fa-check"></i> Deposits for the Current Month</h3>
+                  <h3 class="m-t-10"><i class="fa fa-calendar"></i> Deposits for the Current Month  (<?php echo date('F Y')?>)</h3>
                   <hr>
                   <!-- FIRST ROW -->
                   <?php include("../_access_views/get_view_table_pending_deposit_currmonth.php");?>
@@ -60,13 +89,17 @@
                 <!-- end tab-pane -->
                 <!-- begin tab-pane -->
                 <div class="tab-pane fade" id="default-tab-2">
-                   
+                   <h3 class="m-t-10"><i class="ion-reply-all"></i> Deposits for the Past Months</h3>
+                   <hr>
+                   <!-- FIRST ROW -->
+                   <?php include("../_access_views/get_view_table_pending_deposit_pastmonths.php");?>
+                   <!-- FIRST ROW -->
                 </div>
                 <!-- end tab-pane -->
                
               </div>
               <!-- end tab-content -->
-              
+              <?php  include("../_access_views/get_view_modal_toggle_deposit.php");?>
             </div>
               <!-- end col-6 -->
           

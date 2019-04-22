@@ -1,12 +1,13 @@
 <?php 
   include("../../utilities/header.php");
+  include("../../utilities/title_display.php");
   include("../../utilities/Notification.php");
   include("../../utilities/navibar.php");
   include("../../utilities/BaseJs.php");
   include("../../utilities/Table_Default.php");
 
 ?> 
-    <title>Summary of Collection | PUPQC-CRGS</title>
+    <title><?php echo $title_name; ?> | PUPQC-CRGS</title>
    
     <!-- begin #content -->
     <div id="content" class="content">
@@ -76,7 +77,6 @@
     <!-- end #content -->
   </div>
   <!-- end page container -->
-  
   <?php include("../_access_views/printable_summ_collection.php");?>
   <!--ON PAGE SCRIPTS--
   <script>

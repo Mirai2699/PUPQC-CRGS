@@ -146,7 +146,7 @@
             </span> <b class="caret"></b>
 
           </a>
-          <div class="dropdown-menu dropdown-menu-right">
+          <div class="dropdown-menu dropdown-menu-right" style="font-size: 14px; color: black">
            <!--  <a href="javascript:;" class="dropdown-item">
               <span class="badge badge-danger pull-right">5</span> 
               Notification</a>
@@ -154,13 +154,49 @@
               <span class="badge badge-danger pull-right">2</span> 
               Inbox
             </a> -->
-            <a href="javascript:;" class="dropdown-item">Change Password</a>
-            <a href="#" class="dropdown-item">Lock Screen</a>
+            <a href="javascript:;" class="dropdown-item">
+              <i class="fa fa-key"></i>&nbsp;
+              Change Password
+            </a>
             <div class="dropdown-divider"></div>
-            <a href="../../../logout.php" class="dropdown-item">Log Out</a>
+
+            <form action="../_func/user_lock_screen.php" method="POST">
+                <input type="hidden" name="userID" value="<?php echo $userID;?>">
+                <input type="hidden" name="currpage" value="<?php echo $curr_page;?>">
+                <button class="dropdown-item" type="submit" name="lock">
+                  <i class="ion-locked"></i>&nbsp;
+                  Lock Screen
+                </button> 
+            </form>
+            
+            <div class="dropdown-divider"></div>
+            <?php
+              if($curr_sess_role == 1)
+              {
+                echo
+                '
+                  <a href="../../../logout.php" class="dropdown-item">
+                    <i class="ion-log-out"></i>&nbsp;
+                    Log Out
+                  </a>
+                ';
+              }
+              else
+              {
+                echo
+                '
+                  <a href="#deposit_out" data-toggle="modal" class="dropdown-item">
+                   <i class="ion-log-out"></i>&nbsp;
+                   Log Out
+                  </a>
+                ';
+              }
+            ?>
+            
           </div>
         </li>
       </ul>
       <!-- end header navigation right -->
     </div>
     <!-- end #header -->
+    <?php include("../_access_views/get_view_modal_deposit_out.php");?>

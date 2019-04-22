@@ -7,6 +7,8 @@
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script src="../../../resources/admin/assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
+
+<script src="../../../resources/admin/assets/plugins/DataTables/extensions/Select/js/dataTables.select.min.js"></script>
 <script src="../../../resources/admin/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js"></script>
 <script src="../../../resources/admin/assets/plugins/DataTables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
 <script src="../../../resources/admin/assets/plugins/DataTables/extensions/Buttons/js/buttons.bootstrap.min.js"></script>
@@ -23,5 +25,6 @@
 <script>
 	$(document).ready(function() {
 		TableManageButtons.init();
+		
 	});
 </script>

@@ -16,7 +16,7 @@
                                              and PERMIS.per_verdict = 'YES'");
         if(mysqli_num_rows($access_permission) == 0)
         {
-        	header('Location: 404.html?err=1');
+        	header('Location:../../Utilities/403.php');
         }
         else if(mysqli_num_rows($access_permission) > 0)
         {
@@ -34,7 +34,7 @@
 	        }
 	        else if($access_link != $curr_page)
 			{
-	        	header('Location: 404.html?err=1');
+	        	header('Location:../../Utilities/404.php');
 	    	}
         }
         

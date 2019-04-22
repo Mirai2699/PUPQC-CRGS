@@ -1,12 +1,13 @@
 <?php 
   include("../../utilities/header.php");
+  include("../../utilities/title_display.php");
   include("../../utilities/Notification.php");
   include("../../utilities/navibar.php");
   include("../../utilities/BaseJs.php");
   include("../../utilities/Table_Default.php");
 
 ?>
-    <title>Setup Navigation | PUPQC-CRGS</title>
+   <title><?php echo $title_name; ?> | PUPQC-CRGS</title>
     
     <!-- begin #content -->
     <div id="content" class="content">
@@ -18,63 +19,31 @@
       </ol>
       <!-- end breadcrumb -->
       <!-- begin page-header -->
-      <h1 class="page-header">Configure Navigations <small>Add and Modify</small></h1>
+      <h1 class="page-header">Setup Receipt Accountability <small>Create and View</small></h1>
       <hr style="background-color: black">
       <!-- end page-header -->
       
       <!-- begin panel -->
       <div class="panel panel-inverse">
         <div class="panel-heading">
-          <h4 class="panel-title" style="font-size: 16px">Add Navigation</h4>
+          <h4 class="panel-title" style="font-size: 16px">Create Accountable Form Report</h4>
         </div>
         <div class="panel-body">
-          <form action="../_func/admin_insert_func.php" method="POST">
-            <!-- FIRST ROW -->
-            <div class="row">
-              <div class="col-md-3">
-                  <label>Navigation Description</label>
-                  <input type="text" class="form-control" name="nav_desc" required/>
-              </div>
-              <div class="col-md-3">
-                  <label>Navigation Link</label>
-                  <input type="text" class="form-control" name="nav_link" required/>
-              </div>
-              <div class="col-md-2">
-                  <label>Navigation Class</label>
-                  <input type="text" class="form-control" name="nav_class" required/>
-              </div>
-              <div class="col-md-2">
-                  <label>Navigation Icon-Class</label>
-                  <input type="text" class="form-control" name="nav_icon" />
-              </div>
-              <div class="col-md-2">
-                  <label>Navigation Parent (If Child)</label>
-                  <select class="form-control" name="nav_parent">
-                    <option value="" selected disabled> -- Select Parent Nav -- </option>
-                    <?php
-                        $view_navs = mysqli_query($connection,"SELECT * FROM `r_navigation` WHERE nav_active_stat = 'Active' and nav_class = 'has-sub'");
-                        while($nv = mysqli_fetch_array($view_navs))
-                        {
-                          $nv_ID = $nv["nav_ID"];
-                          $nv_desc = $nv["nav_desc"];
-                    ?>
-                    <option value="<?php echo $nv_ID?>"><?php echo $nv_desc ?></option>
-                    <?php } ?>
-                  </select>
-              </div>
-            </div>
-            <!-- FIRST ROW -->
+          
             <!-- SECOND ROW -->
             <div class="row">
-              <div class="col-md-12" style="text-align: right">
-                <button type="submit" class="btn btn-primary" name="add_navigation" style="font-size: 16px; margin-top: 10px;">
-                  <i class="fa fa-save"></i>
-                  Save
-                </button>
+              <div class="col-md-12" style="text-align: left">
+                <label style="font-size: 17px">
+                  Create an Accountable Form Report for the month of <?php echo date('F Y');?>  
+                </label>
+                <br>
+                <a href="co_create_accountable_form.php" class="btn btn-primary" style="font-size: 16px; margin-top: 10px;">
+                  <i class="fa fa-edit"></i>
+                  Create Report
+                </a>
               </div>
             </div>
             <!-- SECOND ROW -->
-          </form>
         </div>
       </div>
       <!-- end panel -->
@@ -82,11 +51,11 @@
       <!-- START TABLE -->
       <div class="panel panel-inverse">
         <div class="panel-heading">
-          <h4 class="panel-title" style="font-size: 16px">Manage Navigation</h4>
+          <h4 class="panel-title" style="font-size: 16px">View Accountable Form Records</h4>
         </div>
         <div class="panel-body">
           <!-- FIRST ROW -->
-          <?php include("../_access_views/get_view_table_navigations.php");?>
+          <?php include("../_access_views/get_view_table_acc_form_list.php");?>
           <!-- FIRST ROW -->
         </div>
       </div>

@@ -19,72 +19,48 @@
       </ol>
       <!-- end breadcrumb -->
       <!-- begin page-header -->
-      <h1 class="page-header">Certification <small>Filter and Print</small></h1>
+      <h1 class="page-header">Create Receipt Accountability <small>Review and Save</small></h1>
       <hr style="background-color: black">
       <!-- end page-header -->
-
-      <div class="col-md-12" style="background-color: #262626">
-        <form method="POST">
-          <label style="color: white; margin: 5px">Action Available:</label>
-          <div class="row" style="margin: 5px">
-            <div class="col-md-2">
-                <label style="color: white">From:</label>
-                <input type="date" class="form-control" name="start_date">
-            </div>
-            <!-- <div class="col-md-1" style="font-size: 20px">
-              <i class="fa fa-calendar" style="margin-top: 25px; color: white"></i>
-            </div> -->
-            <div class="col-md-2">
-                <label style="color: white">To:</label>
-                <input type="date" class="form-control" name="end_date">
-            </div>
-
-            <div class="col-md-3">
-              <div class="row" style="margin-top: 26px">
-                <button class="btn btn-info" type="submit" name="filter_date">
-                  <i class="fa fa-sync"></i>
-                  Filter Report
-                </button>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <button class="btn btn-primary" type="button" onclick="print();">
-                  <i class="fa fa-print"></i>
-                  Print Report
-                </button>
-              </div>
-            </div>
-
-            
-          </div>
-        </form>
-        <div class="row" style="padding: 2px"></div>
-      </div>
-      <br>
-      <!-- START TABLE -->
+      
+      <!-- START PANEL -->
       <div class="panel panel-inverse">
         <div class="panel-heading">
-          <h4 class="panel-title" style="font-size: 16px">View All Deposits Slip Records</h4>
+          <h4 class="panel-title" style="font-size: 16px">View Accountable Form Report for the Month of <?php echo date('F Y');?></h4>
         </div>
         <div class="panel-body">
           <!-- FIRST ROW -->
-          <?php include("../_access_views/get_view_table_certification.php");?>
+          <?php include("../_access_views/get_view_table_accountable_form.php");?>
           <!-- FIRST ROW -->
         </div>
+        <div class="panel">
+          <div class="col-md-12" style="text-align: right">
+            <div class="panel" style="background-color: #262626; padding: 1px"></div>
+              &nbsp;
+              <a href="co_accountable_forms.php" class="btn btn-default"  style="font-size: 17px; background-color: #e6e6e6; border: 1px black solid">
+                   <i class="ion-reply"></i>&nbsp;
+                   Go Back
+              </a>
+              &nbsp;
+              <button type="button" class="btn btn-primary" onclick="print();" style="font-size: 17px">
+                   <i class="fa fa-print"></i>&nbsp;
+                   Print Report
+              </button>
+              
+            <div class="panel" style="padding: 10px"></div>
+          </div>
+        </div>
       </div>
-      <!-- END TABLE -->
+      <!-- END PANEL -->
+
+      
 
 
     </div>
     <!-- end #content -->
   </div>
+  <?php include("../_access_views/printable_accountable_form.php");?>
   <!-- end page container -->
-  <?php include("../_access_views/printable_certification.php");?>
-  <!--ON PAGE SCRIPTS--
-  <script>
-    $(document).ready(function() {
-      //App.init();
-      FormPlugins.init();
-    });
-  </script> -->
   <script src="../../../resources/custom/jasonday-printThis-edc43df/printThis.js"></script>
   <script type="text/javascript">
     function print()
@@ -110,6 +86,13 @@
     }
   </script>
 
+  <!--ON PAGE SCRIPTS--><!-- 
+  <script>
+    $(document).ready(function() {
+      App.init();
+    });
+  </script> -->
+ 
   <!--ON PAGE SCRIPTS-->
 </body>
 </html>

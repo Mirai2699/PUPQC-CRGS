@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2019 at 03:04 PM
+-- Generation Time: Apr 21, 2019 at 02:12 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -21,6 +21,42 @@ SET time_zone = "+00:00";
 --
 -- Database: `crgs_v1`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `f_lock_screen_log`
+--
+
+CREATE TABLE `f_lock_screen_log` (
+  `ls_ID` int(10) NOT NULL,
+  `ls_page` varchar(200) NOT NULL,
+  `ls_acc_ID` int(10) NOT NULL,
+  `ls_timestamp` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `f_lock_screen_log`
+--
+
+INSERT INTO `f_lock_screen_log` (`ls_ID`, `ls_page`, `ls_acc_ID`, `ls_timestamp`) VALUES
+(2, 'index.php', 2, '2019-04-17 13:14:05'),
+(3, 'co_deposit_done.php', 2, '2019-04-17 13:32:02'),
+(4, 'co_deposit_done.php', 2, '2019-04-17 13:33:22'),
+(5, 'co_review_receipt.php', 2, '2019-04-17 13:33:51'),
+(6, 'co_entry_record.php', 2, '2019-04-17 13:37:57'),
+(7, 'co_review_receipt.php', 2, '2019-04-17 16:43:50'),
+(8, 'index.php', 2, '2019-04-17 17:13:43'),
+(9, 'co_summary_collection.php', 2, '2019-04-17 17:16:54'),
+(10, 'co_summary_collection.php', 2, '2019-04-17 17:17:13'),
+(11, 'index.php', 1, '2019-04-17 17:28:39'),
+(12, 'admin_setup_uacs_type.php', 1, '2019-04-17 17:29:50'),
+(13, 'admin_setup_uacs_type.php', 1, '2019-04-17 17:31:04'),
+(14, 'co_view_receipt.php', 2, '2019-04-17 17:31:32'),
+(15, 'co_review_receipt.php', 2, '2019-04-17 18:46:23'),
+(16, 'co_deposit_pending.php', 2, '2019-04-17 18:46:33'),
+(17, 'co_certification.php', 2, '2019-04-20 09:45:14'),
+(18, 'co_certification.php', 2, '2019-04-20 09:54:55');
 
 -- --------------------------------------------------------
 
@@ -58,7 +94,7 @@ INSERT INTO `f_user_permission` (`per_ID`, `per_user_ID`, `per_user_role`, `per_
 (14, 2, 2, 13, 'NO', '2019-03-17 01:10:17'),
 (15, 2, 2, 14, 'YES', '2019-03-17 18:24:25'),
 (16, 2, 2, 18, 'YES', '2019-03-17 18:36:19'),
-(17, 2, 2, 15, 'YES', '2019-03-17 18:44:36'),
+(17, 2, 2, 15, 'NO', '2019-04-17 05:02:18'),
 (18, 2, 2, 17, 'YES', '2019-03-17 18:44:36'),
 (19, 2, 2, 16, 'YES', '2019-03-17 18:44:36'),
 (20, 2, 2, 19, 'YES', '2019-03-17 18:48:13'),
@@ -68,7 +104,9 @@ INSERT INTO `f_user_permission` (`per_ID`, `per_user_ID`, `per_user_role`, `per_
 (25, 2, 2, 25, 'YES', '2019-04-15 12:54:48'),
 (26, 2, 2, 26, 'YES', '2019-04-15 13:29:54'),
 (27, 2, 2, 27, 'YES', '2019-04-16 19:22:14'),
-(28, 2, 2, 28, 'YES', '2019-04-16 19:22:14');
+(28, 2, 2, 28, 'YES', '2019-04-16 19:22:14'),
+(29, 2, 2, 29, 'YES', '2019-04-20 10:28:38'),
+(30, 2, 2, 30, 'YES', '2019-04-21 09:05:20');
 
 -- --------------------------------------------------------
 
@@ -89,7 +127,7 @@ CREATE TABLE `r_deposit_account` (
 --
 
 INSERT INTO `r_deposit_account` (`dpac_ID`, `dpac_acc_no`, `dpac_bank`, `dpac_starting_count`, `dpac_mod_date`) VALUES
-(1, '0682102047', 'LBP', 2, '2019-04-16');
+(1, '0682102047', 'LBP', 8, '2019-04-16');
 
 -- --------------------------------------------------------
 
@@ -150,7 +188,7 @@ INSERT INTO `r_navigation` (`nav_ID`, `nav_desc`, `nav_link`, `nav_class`, `nav_
 (13, 'Add Collection (sub)', 'co_entry_record.php', 'sub-menu', '', 12, 'Active', '2019-03-17 01:08:15'),
 (14, 'View Records', '', 'has-sub', 'fa fa-copy bg-gradient-blue', NULL, 'Active', '2019-03-17 11:37:31'),
 (15, 'Cash Receipt Register', 'co_cash_receipt.php', 'sub-menu', '', 14, 'Active', '2019-03-17 11:31:05'),
-(16, 'Certification', 'co_certification.php', 'sub-menu', '', 14, 'Active', '2019-03-17 11:31:41'),
+(16, 'Certification', 'co_certification.php', 'sub-menu', '', 18, 'Active', '2019-03-17 11:31:41'),
 (17, 'Accountable Forms', 'co_accountable_forms.php', 'sub-menu', '', 18, 'Active', '2019-04-15 10:11:30'),
 (18, 'Collection Report', '', 'has-sub', 'fa fa-tasks bg-gradient-purple', NULL, 'Active', '2019-03-17 11:35:59'),
 (19, 'Monthly Collection', 'co_monthly_collection.php', 'sub-menu', '', 18, 'Active', '2019-03-17 11:47:22'),
@@ -161,7 +199,9 @@ INSERT INTO `r_navigation` (`nav_ID`, `nav_desc`, `nav_link`, `nav_class`, `nav_
 (25, 'Deposits', '', 'has-sub', 'ion-archive bg-gradient-red', NULL, 'Active', '2019-04-15 06:54:27'),
 (26, 'OR Setup', 'co_setup_or.php', 'has-sub', 'ion-ios-list bg-gradient-aqua', NULL, 'Active', '2019-04-15 07:31:50'),
 (27, 'Pending', 'co_deposit_pending.php', 'sub-menu', '', 25, 'Active', '2019-04-16 01:20:16'),
-(28, 'Deposited', 'co_deposit_done.php', 'sub-menu', '', 25, 'Active', '2019-04-16 01:20:48');
+(28, 'Deposited', 'co_deposit_done.php', 'sub-menu', '', 25, 'Active', '2019-04-16 01:20:48'),
+(29, 'Create Accountable Form', 'co_create_accountable_form.php', 'none', NULL, 18, 'Active', '2019-04-20 04:28:23'),
+(30, 'View Accountable Form', 'co_view_accountable_form.php', 'none', '', 18, 'Active', '2019-04-21 03:05:08');
 
 -- --------------------------------------------------------
 
@@ -188,11 +228,11 @@ INSERT INTO `r_official_receipt` (`or_ID`, `or_no`, `or_status`, `or_create_date
 (5, '062705', 'PAID', '2019-04-01'),
 (6, '062706', 'PAID', '2019-04-01'),
 (7, '062707', 'PAID', '2019-04-01'),
-(8, '062708', 'PENDING', '2019-04-01'),
-(9, '062709', 'PENDING', '2019-04-01'),
-(10, '0627010', 'PENDING', '2019-04-01'),
-(11, '0627011', 'PENDING', '2019-04-01'),
-(12, '0627012', 'PENDING', '2019-04-01'),
+(8, '062708', 'PAID', '2019-04-01'),
+(9, '062709', 'PAID', '2019-04-01'),
+(10, '0627010', 'PAID', '2019-04-01'),
+(11, '0627011', 'PAID', '2019-04-01'),
+(12, '0627012', 'PAID', '2019-04-01'),
 (13, '0627013', 'PENDING', '2019-04-01'),
 (14, '0627014', 'PENDING', '2019-04-01'),
 (15, '0627015', 'PENDING', '2019-04-01'),
@@ -383,6 +423,66 @@ INSERT INTO `r_user_role` (`usr_ID`, `usr_desc`, `usr_stat`, `usr_timestamp`) VA
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t_accountable_forms_fv`
+--
+
+CREATE TABLE `t_accountable_forms_fv` (
+  `af_fv_ID` int(10) NOT NULL,
+  `af_fv_no` varchar(10) NOT NULL,
+  `af_fv_face_value` int(10) NOT NULL,
+  `af_fv_bb_qty` int(10) NOT NULL,
+  `af_fv_bb_from` varchar(20) NOT NULL,
+  `af_fv_bb_to` varchar(20) NOT NULL,
+  `af_fv_rec_qty` int(10) DEFAULT NULL,
+  `af_fv_rec_from` varchar(20) DEFAULT NULL,
+  `af_fv_rec_to` varchar(20) DEFAULT NULL,
+  `af_fv_iss_qty` int(10) NOT NULL,
+  `af_fv_iss_from` varchar(20) NOT NULL,
+  `af_fv_iss_to` varchar(20) NOT NULL,
+  `af_fv_eb_qty` int(10) DEFAULT NULL,
+  `af_fv_eb_from` varchar(20) NOT NULL,
+  `af_fv_eb_to` varchar(20) NOT NULL,
+  `af_fv_person_in_charge` int(10) NOT NULL,
+  `af_fv_datestamp` date NOT NULL,
+  `af_fv_active_stat` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_accountable_forms_wfv`
+--
+
+CREATE TABLE `t_accountable_forms_wfv` (
+  `af_wfv_ID` int(10) NOT NULL,
+  `af_wfv_no` varchar(10) NOT NULL,
+  `af_wfv_bb_qty` int(10) NOT NULL,
+  `af_wfv_bb_from` varchar(20) NOT NULL,
+  `af_wfv_bb_to` varchar(20) NOT NULL,
+  `af_wfv_rec_qty` int(10) DEFAULT NULL,
+  `af_wfv_rec_from` varchar(20) DEFAULT NULL,
+  `af_wfv_rec_to` varchar(20) DEFAULT NULL,
+  `af_wfv_iss_qty` int(10) NOT NULL,
+  `af_wfv_iss_from` varchar(20) NOT NULL,
+  `af_wfv_iss_to` varchar(20) NOT NULL,
+  `af_wfv_eb_qty` int(10) DEFAULT NULL,
+  `af_wfv_eb_from` varchar(20) NOT NULL,
+  `af_wfv_eb_to` varchar(20) NOT NULL,
+  `af_wfv_person_in_charge` int(10) NOT NULL,
+  `af_wfv_datestamp` date NOT NULL,
+  `af_wfv_active_stat` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_accountable_forms_wfv`
+--
+
+INSERT INTO `t_accountable_forms_wfv` (`af_wfv_ID`, `af_wfv_no`, `af_wfv_bb_qty`, `af_wfv_bb_from`, `af_wfv_bb_to`, `af_wfv_rec_qty`, `af_wfv_rec_from`, `af_wfv_rec_to`, `af_wfv_iss_qty`, `af_wfv_iss_from`, `af_wfv_iss_to`, `af_wfv_eb_qty`, `af_wfv_eb_from`, `af_wfv_eb_to`, `af_wfv_person_in_charge`, `af_wfv_datestamp`, `af_wfv_active_stat`) VALUES
+(1, '2019-04', 88, '062701', '0627088', NULL, NULL, NULL, 9, '062701', '062709', 79, '0627010', '0627088', 2, '2019-04-20', 'Active');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t_accounts`
 --
 
@@ -437,7 +537,13 @@ INSERT INTO `t_cr_register_income_references` (`cr_ir_ID`, `cr_ir_ornum_ref`, `c
 (7, '062706', '2019-04-16', 1, 1, '150.00', 'Active', '2019-04-16 13:43:32'),
 (8, '062706', '2019-04-16', 4, 67, '240.00', 'Active', '2019-04-16 13:43:32'),
 (9, '062707', '2019-04-16', 2, 50, '620.75', 'Active', '2019-04-16 13:46:07'),
-(10, '062707', '2019-04-16', 3, 48, '350.00', 'Active', '2019-04-16 13:46:07');
+(10, '062707', '2019-04-16', 3, 48, '350.00', 'Active', '2019-04-16 13:46:07'),
+(11, '062708', '2019-03-17', 2, 53, '500.00', 'Active', '2019-03-17 10:44:05'),
+(12, '062709', '2019-04-17', 1, 1, '150.00', 'Active', '2019-04-17 18:41:59'),
+(13, '062709', '2019-04-17', 2, 50, '500.00', 'Active', '2019-04-17 18:42:00'),
+(14, '0627010', '2019-04-21', 2, 50, '300.00', 'Active', '2019-04-21 09:31:36'),
+(15, '0627011', '2019-04-21', 1, 1, '150.00', 'Active', '2019-04-21 09:32:14'),
+(16, '0627012', '2019-03-30', 3, 23, '250.00', 'Active', '2019-03-30 18:19:56');
 
 -- --------------------------------------------------------
 
@@ -468,7 +574,12 @@ INSERT INTO `t_cr_register_master` (`cr_ID`, `cr_date_payment`, `cr_or_num`, `cr
 (2, '2019-04-15', '062704', 'Clark Ian Woods', '410.00', '0.00', '0.00', '0.00', '410.00', 'Active', '2019-04-15 00:00:00'),
 (3, '2019-04-15', '062705', 'Lowell Dave Agnir', '150.00', '0.00', '0.00', '0.00', '150.00', 'Active', '2019-04-15 00:00:00'),
 (4, '2019-04-16', '062706', 'Mirai Kuriyama', '390.00', '0.00', '0.00', '0.00', '390.00', 'Active', '2019-04-16 00:00:00'),
-(5, '2019-04-16', '062707', 'Vince Martin', '970.75', '0.00', '0.00', '0.00', '970.75', 'Active', '2019-04-16 00:00:00');
+(5, '2019-04-16', '062707', 'Vince Martin', '970.75', '0.00', '0.00', '0.00', '970.75', 'Active', '2019-04-16 00:00:00'),
+(6, '2019-03-17', '062708', 'Mirai Kuriyama', '500.00', '0.00', '0.00', '0.00', '500.00', 'Active', '2019-03-17 00:00:00'),
+(7, '2019-04-17', '062709', 'Keith Eyvan', '650.00', '0.00', '0.00', '0.00', '650.00', 'Active', '2019-04-17 00:00:00'),
+(8, '2019-04-21', '0627010', 'Mirai Kuriyama', '300.00', '0.00', '0.00', '0.00', '300.00', 'Active', '2019-04-21 00:00:00'),
+(9, '2019-04-21', '0627011', 'Cristian Balatbat', '150.00', '0.00', '0.00', '0.00', '150.00', 'Active', '2019-04-21 00:00:00'),
+(10, '2019-03-30', '0627012', 'John Patrick Loyola', '250.00', '0.00', '0.00', '0.00', '250.00', 'Active', '2019-03-30 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -491,7 +602,11 @@ CREATE TABLE `t_deposits` (
 --
 
 INSERT INTO `t_deposits` (`dep_ID`, `dep_acc_no`, `dep_slip_no`, `dep_amount`, `dep_status`, `dep_date_for`, `dep_date_actual`) VALUES
-(1, '0682102047', '2019-001', '1360.75', 'PENDING', '2019-04-16', NULL);
+(1, '0682102047', '2019-001', '1360.75', 'DEPOSITED', '2019-04-16', '2019-04-17'),
+(3, '0682102047', '2019-003', '5710.00', 'DEPOSITED', '2019-04-15', '2019-04-16'),
+(4, '0682102047', '2019-004', '500.00', 'DEPOSITED', '2019-03-17', '2019-04-01'),
+(6, '0682102047', '2019-006', '650.00', 'DEPOSITED', '2019-04-17', '2019-04-17'),
+(7, '0682102047', '2019-007', '250.00', 'DEPOSITED', '2019-03-30', '2019-04-01');
 
 -- --------------------------------------------------------
 
@@ -578,11 +693,34 @@ INSERT INTO `t_users_log` (`log_No`, `log_userID`, `log_usertype`, `log_datestam
 (39, 2, 2, '2019-04-15', '16:14:31'),
 (40, 2, 2, '2019-04-16', '13:13:10'),
 (41, 1, 1, '2019-04-16', '19:17:54'),
-(42, 2, 2, '2019-04-16', '21:01:02');
+(42, 2, 2, '2019-04-16', '21:01:02'),
+(43, 1, 1, '2019-04-17', '11:01:49'),
+(44, 2, 2, '2019-04-17', '13:11:04'),
+(45, 2, 2, '2019-04-17', '13:33:16'),
+(46, 2, 2, '2019-04-17', '17:13:31'),
+(47, 2, 2, '2019-04-17', '17:16:02'),
+(48, 3, 2, '2019-04-17', '17:28:18'),
+(49, 1, 1, '2019-04-17', '17:28:36'),
+(50, 2, 2, '2019-04-17', '17:31:17'),
+(51, 2, 2, '2019-04-17', '17:31:27'),
+(52, 1, 1, '2019-04-20', '09:55:02'),
+(53, 2, 2, '2019-04-20', '09:55:10'),
+(54, 1, 1, '2019-04-20', '10:26:33'),
+(55, 2, 2, '2019-04-20', '10:29:37'),
+(56, 1, 1, '2019-04-21', '09:04:17'),
+(57, 2, 2, '2019-04-21', '09:16:59'),
+(58, 2, 2, '2019-03-30', '18:20:16');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `f_lock_screen_log`
+--
+ALTER TABLE `f_lock_screen_log`
+  ADD PRIMARY KEY (`ls_ID`),
+  ADD KEY `FK_lsuserID` (`ls_acc_ID`);
 
 --
 -- Indexes for table `f_user_permission`
@@ -640,6 +778,22 @@ ALTER TABLE `r_user_role`
   ADD PRIMARY KEY (`usr_ID`);
 
 --
+-- Indexes for table `t_accountable_forms_fv`
+--
+ALTER TABLE `t_accountable_forms_fv`
+  ADD PRIMARY KEY (`af_fv_ID`),
+  ADD UNIQUE KEY `af_fv_no` (`af_fv_no`),
+  ADD KEY `FK_fv_acC_ID` (`af_fv_person_in_charge`);
+
+--
+-- Indexes for table `t_accountable_forms_wfv`
+--
+ALTER TABLE `t_accountable_forms_wfv`
+  ADD PRIMARY KEY (`af_wfv_ID`),
+  ADD UNIQUE KEY `af_wfv_no` (`af_wfv_no`),
+  ADD KEY `FK_acC_ID` (`af_wfv_person_in_charge`);
+
+--
 -- Indexes for table `t_accounts`
 --
 ALTER TABLE `t_accounts`
@@ -688,10 +842,16 @@ ALTER TABLE `t_users_log`
 --
 
 --
+-- AUTO_INCREMENT for table `f_lock_screen_log`
+--
+ALTER TABLE `f_lock_screen_log`
+  MODIFY `ls_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
 -- AUTO_INCREMENT for table `f_user_permission`
 --
 ALTER TABLE `f_user_permission`
-  MODIFY `per_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `per_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `r_deposit_account`
@@ -709,7 +869,7 @@ ALTER TABLE `r_fund_cluster`
 -- AUTO_INCREMENT for table `r_navigation`
 --
 ALTER TABLE `r_navigation`
-  MODIFY `nav_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `nav_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `r_official_receipt`
@@ -736,6 +896,18 @@ ALTER TABLE `r_user_role`
   MODIFY `usr_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `t_accountable_forms_fv`
+--
+ALTER TABLE `t_accountable_forms_fv`
+  MODIFY `af_fv_ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t_accountable_forms_wfv`
+--
+ALTER TABLE `t_accountable_forms_wfv`
+  MODIFY `af_wfv_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `t_accounts`
 --
 ALTER TABLE `t_accounts`
@@ -745,19 +917,19 @@ ALTER TABLE `t_accounts`
 -- AUTO_INCREMENT for table `t_cr_register_income_references`
 --
 ALTER TABLE `t_cr_register_income_references`
-  MODIFY `cr_ir_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cr_ir_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `t_cr_register_master`
 --
 ALTER TABLE `t_cr_register_master`
-  MODIFY `cr_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `cr_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `t_deposits`
 --
 ALTER TABLE `t_deposits`
-  MODIFY `dep_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `dep_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `t_employees`
@@ -769,11 +941,17 @@ ALTER TABLE `t_employees`
 -- AUTO_INCREMENT for table `t_users_log`
 --
 ALTER TABLE `t_users_log`
-  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `f_lock_screen_log`
+--
+ALTER TABLE `f_lock_screen_log`
+  ADD CONSTRAINT `FK_lsuserID` FOREIGN KEY (`ls_acc_ID`) REFERENCES `t_accounts` (`acc_ID`);
 
 --
 -- Constraints for table `f_user_permission`
@@ -789,6 +967,18 @@ ALTER TABLE `f_user_permission`
 ALTER TABLE `r_uacs`
   ADD CONSTRAINT `FK_uacs_fund_cluster` FOREIGN KEY (`uacs_fund_cluster`) REFERENCES `r_fund_cluster` (`fc_ID`),
   ADD CONSTRAINT `FK_uacs_type` FOREIGN KEY (`uacs_type`) REFERENCES `r_uacs_type` (`uacs_type_ID`);
+
+--
+-- Constraints for table `t_accountable_forms_fv`
+--
+ALTER TABLE `t_accountable_forms_fv`
+  ADD CONSTRAINT `FK_fv_acC_ID` FOREIGN KEY (`af_fv_person_in_charge`) REFERENCES `t_accounts` (`acc_ID`);
+
+--
+-- Constraints for table `t_accountable_forms_wfv`
+--
+ALTER TABLE `t_accountable_forms_wfv`
+  ADD CONSTRAINT `FK_acC_ID` FOREIGN KEY (`af_wfv_person_in_charge`) REFERENCES `t_accounts` (`acc_ID`);
 
 --
 -- Constraints for table `t_accounts`
