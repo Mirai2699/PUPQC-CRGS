@@ -21,9 +21,16 @@
           echo "<script>setTimeout(\"location.href = '../_views/co_review_receipt.php?getID=$last_ID';\",0);</script>";
        }
 
+
+
        else if(isset($_POST['add_navigation']))
        { 
           add_navigation();
+       }
+
+       else if()
+       {
+        
        }
 
       
