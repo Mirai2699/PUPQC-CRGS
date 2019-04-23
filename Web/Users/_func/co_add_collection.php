@@ -20,19 +20,19 @@
                   "</script>";
           echo "<script>setTimeout(\"location.href = '../_views/co_review_receipt.php?getID=$last_ID';\",0);</script>";
        }
-
-
-
-       else if(isset($_POST['add_navigation']))
+       else if(isset($_POST['add_collection_outside_entry']))
        { 
-          add_navigation();
-       }
+          
+          add_collection_summary();
+          add_collection_particulars();
+          //update_or_stat();
 
-       else if()
-       {
-        
+          echo "<script type=\"text/javascript\">".
+                   "alert
+                   ('You have successfully saved your entries; Wait for the collection process to be finished.');".
+                  "</script>";
+          echo "<script>setTimeout(\"location.href = '../../../student_entry.php';\",0);</script>";
        }
-
       
 
       

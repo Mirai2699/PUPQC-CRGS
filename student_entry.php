@@ -74,7 +74,7 @@
 			    <h4 class="panel-title" style="font-size: 16px">Add Collection  </h4>
 			  </div>
 			  <div class="panel-body">
-			    <form action=".Web/Users/_func/co_add_collection.php" method="POST">
+			    <form action="Web/Users/_func/co_add_collection.php" method="POST">
 			      <!-- FIRST ROW -->
 
 			      <p style="font-size: 17px">Today's Date:<br><b> <?php echo date('F d, Y'); ?></b></p>
@@ -143,7 +143,7 @@
 			                                  <div class="form-group">
 			                                       <label>UAC Code / Desc:</label><br>
 			                                       <select id="ddItem" class="form-control UAC_DESC" name="cr_uacs[]" required onchange="changeUACAmount(this,$(this).val())" style="font-size: 16px">
-			                                         <option value="" selected disabled> -- Select UACS -- </option>
+			                                         <option value="" selected disabled> -- Select Particulars -- </option>
 			                                         <?php
 			                                             $view_usr = mysqli_query($connection,"SELECT * FROM `r_uacs` WHERE uacs_acc_stat = 'Active' ");
 			                                             while($usr = mysqli_fetch_array($view_usr))
@@ -151,7 +151,7 @@
 			                                               $uac_ID = $usr["uacs_ID"];
 			                                               $uac_title = $usr["uacs_acc_title"];
 			                                               $uac_newcode = $usr["uacs_acc_code_new"];  
-			                                               $uacs_display = '('.$uac_newcode.') &nbsp;&nbsp; - '.$uac_title;
+			                                               $uacs_display = $uac_title;
 			                                         ?>
 			                                         <option value="<?php echo $uac_ID?>"><?php echo $uacs_display ?></option>
 			                                         <?php } ?>
@@ -261,7 +261,7 @@
 	       // alert($(OBJECT).parents().eq(2).find('.label1').text());
 	       // $(OBJECT).parents().eq(2).find('.label5').text('Changed');
 	       $.ajax({
-	         url:'Web/Users/_views/get_income_type.php',
+	         url:'Web/Users/_views/get_income_type_student_entry.php',
 	         type:'POST',
 	         data:{
 	           category: val, input:'type'
@@ -286,7 +286,7 @@
 	       // alert($(OBJECT).parents().eq(2).find('.label1').text());
 	       // $(OBJECT).parents().eq(2).find('.label5').text('Changed');
 	       $.ajax({
-	         url:'Web/Users/_views/get_income_type.php',
+	         url:'Web/Users/_views/get_income_type_student_entry.php',
 	         type:'POST',
 	         data:{
 	           TypeID: val, input:'amount'

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2019 at 02:12 PM
+-- Generation Time: Apr 23, 2019 at 02:39 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -56,7 +56,11 @@ INSERT INTO `f_lock_screen_log` (`ls_ID`, `ls_page`, `ls_acc_ID`, `ls_timestamp`
 (15, 'co_review_receipt.php', 2, '2019-04-17 18:46:23'),
 (16, 'co_deposit_pending.php', 2, '2019-04-17 18:46:33'),
 (17, 'co_certification.php', 2, '2019-04-20 09:45:14'),
-(18, 'co_certification.php', 2, '2019-04-20 09:54:55');
+(18, 'co_certification.php', 2, '2019-04-20 09:54:55'),
+(19, 'index.php', 2, '2019-04-23 13:48:10'),
+(20, 'co_review_receipt.php', 2, '2019-04-23 14:09:55'),
+(21, 'co_entry_record.php', 2, '2019-04-23 14:10:50'),
+(22, 'co_entry_record.php', 2, '2019-04-23 20:38:29');
 
 -- --------------------------------------------------------
 
@@ -106,7 +110,9 @@ INSERT INTO `f_user_permission` (`per_ID`, `per_user_ID`, `per_user_role`, `per_
 (27, 2, 2, 27, 'YES', '2019-04-16 19:22:14'),
 (28, 2, 2, 28, 'YES', '2019-04-16 19:22:14'),
 (29, 2, 2, 29, 'YES', '2019-04-20 10:28:38'),
-(30, 2, 2, 30, 'YES', '2019-04-21 09:05:20');
+(30, 2, 2, 30, 'YES', '2019-04-21 09:05:20'),
+(31, 2, 2, 13, 'YES', '2019-04-23 14:10:16'),
+(32, 2, 2, 31, 'YES', '2019-04-23 14:12:10');
 
 -- --------------------------------------------------------
 
@@ -184,8 +190,8 @@ INSERT INTO `r_navigation` (`nav_ID`, `nav_desc`, `nav_link`, `nav_class`, `nav_
 (9, 'Setup UACS', 'admin_setup_uacs.php', 'sub-menu', '', 6, 'Active', '2019-03-16 07:43:53'),
 (10, 'Setup Fund Cluster', 'admin_setup_fund_cluster.php', 'sub-menu', '', 6, 'Active', '2019-03-16 07:44:21'),
 (11, 'Setup UACS Type', 'admin_setup_uacs_type.php', 'sub-menu', '', 6, 'Active', '2019-03-16 07:43:31'),
-(12, 'Add Collection', 'co_entry_record.php', 'has-sub', 'fa fa-plus bg-gradient-green', NULL, 'Active', '2019-03-17 01:11:27'),
-(13, 'Add Collection (sub)', 'co_entry_record.php', 'sub-menu', '', 12, 'Active', '2019-03-17 01:08:15'),
+(12, 'Add Collection', '', 'has-sub', 'fa fa-plus bg-gradient-green', NULL, 'Active', '2019-03-17 01:11:27'),
+(13, 'Add Collection (Manual)', 'co_entry_record.php', 'sub-menu', '', 12, 'Active', '2019-03-17 01:08:15'),
 (14, 'View Records', '', 'has-sub', 'fa fa-copy bg-gradient-blue', NULL, 'Active', '2019-03-17 11:37:31'),
 (15, 'Cash Receipt Register', 'co_cash_receipt.php', 'sub-menu', '', 14, 'Active', '2019-03-17 11:31:05'),
 (16, 'Certification', 'co_certification.php', 'sub-menu', '', 18, 'Active', '2019-03-17 11:31:41'),
@@ -201,7 +207,8 @@ INSERT INTO `r_navigation` (`nav_ID`, `nav_desc`, `nav_link`, `nav_class`, `nav_
 (27, 'Pending', 'co_deposit_pending.php', 'sub-menu', '', 25, 'Active', '2019-04-16 01:20:16'),
 (28, 'Deposited', 'co_deposit_done.php', 'sub-menu', '', 25, 'Active', '2019-04-16 01:20:48'),
 (29, 'Create Accountable Form', 'co_create_accountable_form.php', 'none', NULL, 18, 'Active', '2019-04-20 04:28:23'),
-(30, 'View Accountable Form', 'co_view_accountable_form.php', 'none', '', 18, 'Active', '2019-04-21 03:05:08');
+(30, 'View Accountable Form', 'co_view_accountable_form.php', 'none', '', 18, 'Active', '2019-04-21 03:05:08'),
+(31, 'Add Collection (Student)', 'co_entry_record_student.php', 'sub-menu', '', 12, 'Active', '2019-04-23 08:11:57');
 
 -- --------------------------------------------------------
 
@@ -233,9 +240,9 @@ INSERT INTO `r_official_receipt` (`or_ID`, `or_no`, `or_status`, `or_create_date
 (10, '0627010', 'PAID', '2019-04-01'),
 (11, '0627011', 'PAID', '2019-04-01'),
 (12, '0627012', 'PAID', '2019-04-01'),
-(13, '0627013', 'PENDING', '2019-04-01'),
-(14, '0627014', 'PENDING', '2019-04-01'),
-(15, '0627015', 'PENDING', '2019-04-01'),
+(13, '0627013', 'PAID', '2019-04-01'),
+(14, '0627014', 'PAID', '2019-04-01'),
+(15, '0627015', 'PAID', '2019-04-01'),
 (16, '0627016', 'PENDING', '2019-04-01'),
 (17, '0627017', 'PENDING', '2019-04-01'),
 (18, '0627018', 'PENDING', '2019-04-01'),
@@ -543,7 +550,14 @@ INSERT INTO `t_cr_register_income_references` (`cr_ir_ID`, `cr_ir_ornum_ref`, `c
 (13, '062709', '2019-04-17', 2, 50, '500.00', 'Active', '2019-04-17 18:42:00'),
 (14, '0627010', '2019-04-21', 2, 50, '300.00', 'Active', '2019-04-21 09:31:36'),
 (15, '0627011', '2019-04-21', 1, 1, '150.00', 'Active', '2019-04-21 09:32:14'),
-(16, '0627012', '2019-03-30', 3, 23, '250.00', 'Active', '2019-03-30 18:19:56');
+(16, '0627012', '2019-03-30', 3, 23, '250.00', 'Active', '2019-03-30 18:19:56'),
+(17, '0627013', '2019-04-23', 1, 1, '150.00', 'Active', '2019-04-23 19:58:36'),
+(18, '0627013', '2019-04-23', 3, 20, '40.00', 'Active', '2019-04-23 19:58:36'),
+(19, '0627013', '2019-04-23', 3, 16, '0.00', 'Active', '2019-04-23 20:02:49'),
+(20, '0627013', '2019-04-23', 2, 50, '0.00', 'Active', '2019-04-23 20:02:49'),
+(21, '0627014', '2019-04-23', 3, 18, '50.00', 'Active', '2019-04-23 20:27:43'),
+(22, '0627014', '2019-04-23', 3, 48, '70.00', 'Active', '2019-04-23 20:27:43'),
+(23, '0627015', '2019-04-23', 3, 44, '150.01', 'Active', '2019-04-23 20:32:10');
 
 -- --------------------------------------------------------
 
@@ -579,7 +593,11 @@ INSERT INTO `t_cr_register_master` (`cr_ID`, `cr_date_payment`, `cr_or_num`, `cr
 (7, '2019-04-17', '062709', 'Keith Eyvan', '650.00', '0.00', '0.00', '0.00', '650.00', 'Active', '2019-04-17 00:00:00'),
 (8, '2019-04-21', '0627010', 'Mirai Kuriyama', '300.00', '0.00', '0.00', '0.00', '300.00', 'Active', '2019-04-21 00:00:00'),
 (9, '2019-04-21', '0627011', 'Cristian Balatbat', '150.00', '0.00', '0.00', '0.00', '150.00', 'Active', '2019-04-21 00:00:00'),
-(10, '2019-03-30', '0627012', 'John Patrick Loyola', '250.00', '0.00', '0.00', '0.00', '250.00', 'Active', '2019-03-30 00:00:00');
+(10, '2019-03-30', '0627012', 'John Patrick Loyola', '250.00', '0.00', '0.00', '0.00', '250.00', 'Active', '2019-03-30 00:00:00'),
+(11, '2019-04-23', '0627013', 'Ma. Michaela Alejandria', '190.00', '0.00', '0.00', '0.00', '190.00', 'Active', '2019-04-23 19:58:36'),
+(12, '2019-04-23', '0627013', 'Keith Eyvan Alvior', '0.00', '0.00', '0.00', '0.00', '0.00', 'Active', '2019-04-23 00:00:00'),
+(13, '2019-04-23', '0627014', 'Mirai Kuriyama', '120.00', '0.00', '0.00', '0.00', '120.00', 'Active', '2019-04-23 20:27:43'),
+(14, '2019-04-23', '0627015', 'Julie Ann Resnera', '150.01', '0.00', '0.00', '0.00', '150.01', 'Active', '2019-04-23 20:32:10');
 
 -- --------------------------------------------------------
 
@@ -709,7 +727,12 @@ INSERT INTO `t_users_log` (`log_No`, `log_userID`, `log_usertype`, `log_datestam
 (55, 2, 2, '2019-04-20', '10:29:37'),
 (56, 1, 1, '2019-04-21', '09:04:17'),
 (57, 2, 2, '2019-04-21', '09:16:59'),
-(58, 2, 2, '2019-03-30', '18:20:16');
+(58, 2, 2, '2019-03-30', '18:20:16'),
+(59, 2, 2, '2019-04-23', '14:04:29'),
+(60, 1, 1, '2019-04-23', '14:10:01'),
+(61, 2, 2, '2019-04-23', '14:10:36'),
+(62, 1, 1, '2019-04-23', '14:10:56'),
+(63, 2, 2, '2019-04-23', '14:12:20');
 
 --
 -- Indexes for dumped tables
@@ -845,13 +868,13 @@ ALTER TABLE `t_users_log`
 -- AUTO_INCREMENT for table `f_lock_screen_log`
 --
 ALTER TABLE `f_lock_screen_log`
-  MODIFY `ls_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ls_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `f_user_permission`
 --
 ALTER TABLE `f_user_permission`
-  MODIFY `per_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `per_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `r_deposit_account`
@@ -869,7 +892,7 @@ ALTER TABLE `r_fund_cluster`
 -- AUTO_INCREMENT for table `r_navigation`
 --
 ALTER TABLE `r_navigation`
-  MODIFY `nav_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `nav_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `r_official_receipt`
@@ -917,13 +940,13 @@ ALTER TABLE `t_accounts`
 -- AUTO_INCREMENT for table `t_cr_register_income_references`
 --
 ALTER TABLE `t_cr_register_income_references`
-  MODIFY `cr_ir_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `cr_ir_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `t_cr_register_master`
 --
 ALTER TABLE `t_cr_register_master`
-  MODIFY `cr_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cr_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `t_deposits`
@@ -941,7 +964,7 @@ ALTER TABLE `t_employees`
 -- AUTO_INCREMENT for table `t_users_log`
 --
 ALTER TABLE `t_users_log`
-  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- Constraints for dumped tables
