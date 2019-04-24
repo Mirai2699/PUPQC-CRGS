@@ -89,6 +89,8 @@
                           
                         </div>
                         <hr>
+                        <p style="font-size: 14px; color: #262626">For external payment entry, click <a href="student_entry.php">here.</a> </p>
+                        <hr>
                         <p class="text-center text-grey-darker" style="font-size: 10px">
                             &copy; SRG 7TH Generation All Right Reserved 2019
                         </p>

@@ -221,7 +221,12 @@
 			  </div>
 			</div>
 			<!-- end panel -->
-
+			<hr>
+			<p style="font-size: 14px; color: #262626">Are you a registered user of the system? Click <a href="index.php">here</a> to login.</p>
+			<hr>
+			<p class="text-center text-grey-darker" style="font-size: 10px">
+			    &copy; SRG 7TH Generation All Right Reserved 2019
+			</p>
 		</div>
 		<!-- end #content -->
 		

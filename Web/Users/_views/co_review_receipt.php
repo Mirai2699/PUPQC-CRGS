@@ -73,7 +73,7 @@
 
             </div>
             <div class="panel" style="padding: 1px; background-color: #262626; margin-top: 10px"></div>
-            <button class="btn btn-primary" type="button">
+            <button class="btn btn-primary" type="button" onclick="print();">
               <i class="fa fa-print"></i>
               Print Receipt
             </button>
@@ -87,14 +87,37 @@
   </div>
   <!-- end page container -->
   
-
+  <?php include("../_access_views/printable_receipt.php");?>
   <!--ON PAGE SCRIPTS--><!-- 
   <script>
     $(document).ready(function() {
       App.init();
     });
   </script> -->
- 
+ <script src="../../../resources/custom/jasonday-printThis-edc43df/printThis.js"></script>
+ <script type="text/javascript">
+   function print()
+   {
+     $('#printable').printThis({
+        debug: false,               // show the iframe for debugging
+        importCSS: true,            // import page CSS
+        importStyle:true,           // import style tags
+        printContainer: true,       // grab outer container as well as the contents of the selector
+        //loadCSS: "",              // path to additional css file - use an array [] for multiple
+        pageTitle: "",              // add title to print page
+        removeInline: false,        // remove all inline styles from print elements
+        printDelay: 333,            // variable print delay
+        header: null,               // prefix to html
+        footer: "",               // postfix to html
+        base: false ,               // preserve the BASE tag, or accept a string for the URL
+        formValues: true,           // preserve input/form values
+        canvas: false,              // copy canvas elements (experimental)
+        doctypeString: null,        // enter a different doctype for older markup
+        removeScripts: false,       // remove script tags from print content
+        copyTagClasses: false       // copy classes from the html & body tag
+      });
+   }
+ </script>
   <!--ON PAGE SCRIPTS-->
 </body>
 </html>

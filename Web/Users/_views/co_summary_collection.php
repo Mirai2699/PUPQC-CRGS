@@ -77,7 +77,7 @@
     <!-- end #content -->
   </div>
   <!-- end page container -->
-  <?php include("../_access_views/printable_summ_collection.php");?>
+  <?php include("../_access_views/printable_receipt.php");?>
   <!--ON PAGE SCRIPTS--
   <script>
     $(document).ready(function() {
