@@ -1,11 +1,11 @@
 <!-- <link href="../../../resources/custom/print_format.css" media="print" rel="stylesheet" /> -->
 <style type="text/css">
   @page {
-    size:4in 6in;
-    /*size:letter;*/
+    size:5in 7in;
+   /* size:letter;*/
     margin-top: 0in; 
-    margin-left: 0.2in;
-    margin-right: 0.2in;
+    margin-left: 0in;
+    margin-right: 1.3in;
     margin-bottom: 0in;
    
   }
@@ -54,14 +54,14 @@
            </td>
          </tr>
        </table> -->
-
+       <br><br><br>
        <table class="table1" style="width: 100%; font-size: 13px;">
          <tr class="table1">
-           <td class="table1" style="text-align: left">
+           <td class="table1" style="text-align: left; visibility: hidden;">
              &nbsp;&nbsp;&nbsp;&nbsp; 05 2 06 441
            </td>
-           <td class="table1" style="text-align: left">
-             &nbsp;&nbsp;&nbsp;&nbsp; <?php echo $cr_nf_date_payment; ?>
+           <td class="table1" style="text-align: left; margin-top:3px; font-family: arial">
+             <?php echo $cr_nf_date_payment; ?>
            </td>
          </tr>
        </table>
@@ -70,8 +70,8 @@
        </center>
        <hr style="visibility: hidden">
 
-       <pre style="font-size: 9px; font-family: arial">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $cr_payor; ?></pre>
-       <table  class="table1"style="height:300px; width: 100%">
+       <pre style="font-size: 13px; font-family: arial; ">&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $cr_payor; ?></pre>
+       <table  class="table1"style="height:330px; width: 100%">
          <thead style="visibility: hidden">
            <th class="table1" style="font-size: 9px">Nature of Collection</th>
            <th class="table1" style="font-size: 9px">Account Code</th>
@@ -94,37 +94,119 @@
                    $part_desc = $row_part['uacs_acc_title'];
                    $part_amount = $row_part['cr_ir_amount'];
                    $display_part = '
-                                    <tr style="height: 15px">
-                                      <td style="font-size: 10px; text-align:  left">
+                                    <tr style="height: 2%">
+                                      <td style="font-size: 13px; text-align:  left">
                                          '.$part_desc.'
                                       </td>
-                                      <td style="font-size: 10px; text-align:  left"></td>
-                                      <td style="font-size: 10px; text-align:  right">
+                                      <td style="font-size: 13px; text-align:  left"></td>
+                                      <td style="font-size: 13px; text-align:  right">
                                          ₱ '.$part_amount.'
                                       </td>
                                      </tr>';
                   // echo $part_desc.'-'.$part_amount.'<br>';
                      echo $display_part;
                      $total = $total + $part_amount;
+                     $nf_total = number_format((float)$total, 2, '.', '');
                  }
 
            ?>  
-           <tr>
-              <td class="table1"></td>
-              <td class="table1"></td>
-              <td class="table1"></td>
-           </tr>    
-           <tr style="height: 20px">
-             <td class="table1" colspan="2" style="font-size: 9px"><b>TOTAL</b></td>
-             <td class="table1" style="font-size: 10px; text-align: right">₱ <?php echo $total; ?></td>
+           <!-- <tr style="height: 2%">
+             <td style="font-size: 13px; text-align:  left">
+                TEST
+             </td>
+             <td style="font-size: 13px; text-align:  left"></td>
+             <td style="font-size: 13px; text-align:  right">
+                ₱ 500.00
+             </td>
            </tr>
-           <tr style="height: 20px">
-             <td class="table1" colspan="3" style="font-size: 9px; text-align: left; visibility: hidden">Amount in Words</td>
+           <tr style="height: 2%">
+             <td style="font-size: 13px; text-align:  left">
+                TEST
+             </td>
+             <td style="font-size: 13px; text-align:  left"></td>
+             <td style="font-size: 13px; text-align:  right">
+                ₱ 500.00
+             </td>
            </tr>
-           <tr style="height: 10px">
-             <td class="table1" colspan="3" style="font-size: 9px; text-align: left;"></td>
+           <tr style="height: 2%">
+             <td style="font-size: 13px; text-align:  left">
+                TEST
+             </td>
+             <td style="font-size: 13px; text-align:  left"></td>
+             <td style="font-size: 13px; text-align:  right">
+                ₱ 500.00
+             </td>
+           </tr>
+           <tr style="height: 2%">
+             <td style="font-size: 13px; text-align:  left">
+                TEST
+             </td>
+             <td style="font-size: 13px; text-align:  left"></td>
+             <td style="font-size: 13px; text-align:  right">
+                ₱ 500.00
+             </td>
+           </tr>
+           <tr style="height: 2%">
+             <td style="font-size: 13px; text-align:  left">
+                TEST
+             </td>
+             <td style="font-size: 13px; text-align:  left"></td>
+             <td style="font-size: 13px; text-align:  right">
+                ₱ 500.00
+             </td>
+           </tr> -->
+
+           <tr style="height: 40%">
+              <td class="table1"></td>
+              <td class="table1"></td>
+              <td class="table1"></td>
+           </tr>   
+           <tr style="height: 60%">
+              <td class="table1"></td>
+              <td class="table1"></td>
+              <td class="table1"></td>
+           </tr>
+           <tr style="height: 2%; visibility: hidden">
+             <td class="table1" colspan="2" style="font-size: 9px; visibility: hidden;"><b>TOTAL</b></td>
+             <td class="table1" style="font-size: 13px; text-align: right">₱ <?php echo $nf_total; ?></td>
+           </tr>
+           <tr style="height: 2%; visibility: hidden">
+             <td class="table1" colspan="1" style="font-size: 9px; text-align: left; visibility: hidden">Amount in Words</td>
+             <td class="table1" colspan="2" style="font-size: 13px; text-align: left;">Amount in Words</td>
+           </tr>
          </tbody>
        </table>
+
+      <table  class="table1"style="height:300px; width: 100%">
+        <thead style="visibility: hidden">
+          <th class="table1" style="font-size: 9px">Nature of Collection</th>
+          <th class="table1" style="font-size: 9px">Account Code</th>
+          <th class="table1" style="font-size: 9px">Amount</th>
+        </thead>
+        <tbody style="font-family: arial">
+          <tr style="height: 2%">
+            <td class="table1" colspan="2" style="font-size: 9px; visibility: hidden;"><b>TOTAL</b></td>
+            <td class="table1" style="font-size: 13px; text-align: right">₱ <?php echo $nf_total; ?></td>
+            <input id="input" type="hidden" name="input" value="<?php echo $nf_total; ?>" />
+          </tr>
+          <tr style="height: 2%">
+            <td class="table1" colspan="1" style="font-size: 9px; text-align: left; visibility: hidden">Amount in Words</td>
+            <td id="output" class="table1" colspan="2" style="font-size: 13px; text-align: left; text-transform: uppercase"></td>
+          </tr>
+
+
+          <script type="text/javascript" src="../../../resources/custom/numberToWords.js"></script>
+          <script type="text/javascript">
+             var input = document.getElementById('input');
+             var output = document.getElementById('output');
+
+        
+             output.innerHTML = numberToWords( parseInt(input.value, 10));
+            
+          </script>
+        
+        </tbody>
+      </table>
 
        <table class="table1" style="width:100%; font-size: 9px; visibility: hidden;">
          <tr>
@@ -152,8 +234,9 @@
          </tr>
        </table>
 
-       <p style="font-size: 10px; visibility: hidden">Received the amount stated above.</p>
-       <p style="font-size: 9px; text-align: center"><u>___Ms. Merly B. Gonzalbo____</u><br>
+       
+       <p style="font-size: 14px; text-align: center; margin-top: 45px; font-family: arial">
+        Ms. Merly B. Gonzalbo<br>
        </p>
       </div>
 

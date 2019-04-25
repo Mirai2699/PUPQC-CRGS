@@ -6,6 +6,7 @@
           require('../../../db_con.php');
           add_collection_summary();
           add_collection_particulars();
+          add_cash_receipt_record();
           update_or_stat();
 
           $get_max = mysqli_query($connection, "SELECT MAX(cr_ID) AS LAST FROM `t_cr_register_master`");
@@ -32,6 +33,10 @@
                    ('You have successfully saved your entries; Wait for the collection process to be finished.');".
                   "</script>";
           echo "<script>setTimeout(\"location.href = '../../../student_entry.php';\",0);</script>";
+       }
+       else if(isset($_POST['test']))
+       {
+         add_cash_receipt_record();
        }
       
 
@@ -138,19 +143,51 @@
             $stmt->bindParam(3, $cr_amount);
             $stmt->bindParam(4, $cr_ornum);
 
-       
             $arr = $_POST; 
             for($i = 0; $i <= count($arr['cr_uacs'])-1;$i++)
             {   
-
                 $cr_uacs = $arr['cr_uacs'][$i];
                 $cr_uacs_type = $arr['cr_uacs_type'][$i];
                 $cr_amount = $arr['cr_amount'][$i];
                 $cr_ornum = $arr['cr_ornum'];
                 $stmt->execute();
-
             }
+            
   
+        }
+        function add_cash_receipt_record()
+        {
+          require('../../../db_con.php');
+          $cr_ornum = $_POST['cr_ornum'];
+          $cr_payor = $_POST['cr_payor'];
+          $cr_total_payment = $_POST['cr_total'];
+
+
+          $arr = $_POST; 
+          $all_particulars = '';
+          for($i = 0; $i <= count($arr['cr_uacs'])-1;$i++)
+          {   
+
+              $cr_uacs = $arr['cr_uacs'][$i];
+
+
+              $get_particulars = mysqli_query($connection, "SELECT * FROM `r_uacs` 
+                                                                     WHERE uacs_ID = '$cr_uacs'
+                                                                    ");
+              
+              while($row_part = mysqli_fetch_assoc($get_particulars))
+              {
+                $part_desc = $row_part['uacs_acc_title'];
+               
+              }
+              $all_particulars = $all_particulars.''.$part_desc.',';
+          }
+          $today = date('Y-m-d h:i:s');
+         
+          $insert = "INSERT INTO `t_cash_receipt_record` (crt_date, crt_reference_no, crt_payor, crt_nat_col, crt_collection, crt_un_deposit)
+                                                  VALUES ('$today', '$cr_ornum', '$cr_payor', '$all_particulars', '$cr_total_payment', '$cr_total_payment' )";
+          //print_r($insert);
+          mysqli_query($connection, $insert);
         }
 ?>
 

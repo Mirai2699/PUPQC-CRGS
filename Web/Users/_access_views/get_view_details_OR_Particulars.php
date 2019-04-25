@@ -24,6 +24,7 @@
        // echo $part_desc.'-'.$part_amount.'<br>';
           echo $display_part;
           $total = $total + $part_amount;
+          $nf_total = number_format((float)$total, 2, '.', '');
       }
 
 ?>      

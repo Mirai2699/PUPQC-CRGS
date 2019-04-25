@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2019 at 04:21 AM
+-- Generation Time: Apr 25, 2019 at 11:50 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -61,7 +61,9 @@ INSERT INTO `f_lock_screen_log` (`ls_ID`, `ls_page`, `ls_acc_ID`, `ls_timestamp`
 (20, 'co_review_receipt.php', 2, '2019-04-23 14:09:55'),
 (21, 'co_entry_record.php', 2, '2019-04-23 14:10:50'),
 (22, 'co_entry_record.php', 2, '2019-04-23 20:38:29'),
-(23, 'co_review_receipt.php', 2, '2019-04-25 09:51:19');
+(23, 'co_review_receipt.php', 2, '2019-04-25 09:51:19'),
+(24, 'index.php', 2, '2019-04-25 16:10:07'),
+(25, 'co_entry_record.php', 2, '2019-04-25 16:56:50');
 
 -- --------------------------------------------------------
 
@@ -135,7 +137,7 @@ CREATE TABLE `r_deposit_account` (
 --
 
 INSERT INTO `r_deposit_account` (`dpac_ID`, `dpac_acc_no`, `dpac_bank`, `dpac_starting_count`, `dpac_mod_date`) VALUES
-(1, '0682102047', 'LBP', 8, '2019-04-16');
+(1, '0682102047', 'LBP', 10, '2019-04-16');
 
 -- --------------------------------------------------------
 
@@ -246,9 +248,9 @@ INSERT INTO `r_official_receipt` (`or_ID`, `or_no`, `or_status`, `or_create_date
 (14, '0627014', 'PAID', '2019-04-01'),
 (15, '0627015', 'PAID', '2019-04-01'),
 (16, '0627016', 'PAID', '2019-04-01'),
-(17, '0627017', 'PENDING', '2019-04-01'),
-(18, '0627018', 'PENDING', '2019-04-01'),
-(19, '0627019', 'PENDING', '2019-04-01'),
+(17, '0627017', 'PAID', '2019-04-01'),
+(18, '0627018', 'PAID', '2019-04-01'),
+(19, '0627019', 'PAID', '2019-04-01'),
 (20, '0627020', 'PENDING', '2019-04-01'),
 (21, '0627050', 'PENDING', '2019-04-01'),
 (22, '0627051', 'PENDING', '2019-04-01'),
@@ -518,6 +520,25 @@ INSERT INTO `t_accounts` (`acc_ID`, `acc_empID`, `acc_username`, `acc_password`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t_cash_receipt_record`
+--
+
+CREATE TABLE `t_cash_receipt_record` (
+  `crt_ID` int(10) NOT NULL,
+  `crt_date` datetime NOT NULL,
+  `crt_reference_no` varchar(10) NOT NULL,
+  `crt_payor` varchar(225) NOT NULL,
+  `crt_mfm_pap` varchar(10) DEFAULT NULL,
+  `crt_object_code` varchar(10) DEFAULT NULL,
+  `crt_nat_col` varchar(255) DEFAULT NULL,
+  `crt_collection` decimal(10,2) DEFAULT NULL,
+  `crt_deposit` decimal(10,2) DEFAULT NULL,
+  `crt_un_deposit` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t_cr_register_income_references`
 --
 
@@ -561,7 +582,18 @@ INSERT INTO `t_cr_register_income_references` (`cr_ir_ID`, `cr_ir_ornum_ref`, `c
 (22, '0627014', '2019-04-23', 3, 48, '70.00', 'Active', '2019-04-23 20:27:43'),
 (23, '0627015', '2019-04-23', 3, 44, '150.01', 'Active', '2019-04-23 20:32:10'),
 (24, '0627016', '2019-04-25', 3, 3, '60.00', 'Active', '2019-04-25 09:52:10'),
-(25, '0627016', '2019-04-25', 3, 43, '200.00', 'Active', '2019-04-25 09:52:10');
+(25, '0627016', '2019-04-25', 3, 43, '200.00', 'Active', '2019-04-25 09:52:10'),
+(26, '0627017', '2019-04-25', 1, 1, '150.00', 'Active', '2019-04-25 15:14:00'),
+(27, '0627017', '2019-04-25', 2, 50, '500.00', 'Active', '2019-04-25 15:14:00'),
+(28, '0627017', '2019-04-25', 3, 3, '60.00', 'Active', '2019-04-25 15:14:00'),
+(29, '0627017', '2019-04-25', 3, 13, '50.00', 'Active', '2019-04-25 15:14:00'),
+(30, '0627017', '2019-04-25', 3, 44, '150.00', 'Active', '2019-04-25 15:14:00'),
+(31, '0627017', '2019-04-25', 3, 48, '350.00', 'Active', '2019-04-25 15:14:00'),
+(32, '0627017', '2019-04-25', 3, 43, '150.00', 'Active', '2019-04-25 15:14:00'),
+(33, '0627018', '2019-04-25', 3, 3, '60.00', 'Active', '2019-04-25 15:19:45'),
+(34, '0627018', '2019-04-25', 3, 48, '350.00', 'Active', '2019-04-25 15:19:45'),
+(35, '0627019', '2019-04-25', 3, 3, '60.00', 'Active', '2019-04-25 17:23:29'),
+(36, '0627019', '2019-04-25', 3, 4, '300.00', 'Active', '2019-04-25 17:23:30');
 
 -- --------------------------------------------------------
 
@@ -602,7 +634,10 @@ INSERT INTO `t_cr_register_master` (`cr_ID`, `cr_date_payment`, `cr_or_num`, `cr
 (12, '2019-04-23', '0627013', 'Keith Eyvan Alvior', '0.00', '0.00', '0.00', '0.00', '0.00', 'Active', '2019-04-23 00:00:00'),
 (13, '2019-04-23', '0627014', 'Mirai Kuriyama', '120.00', '0.00', '0.00', '0.00', '120.00', 'Active', '2019-04-23 20:27:43'),
 (14, '2019-04-23', '0627015', 'Julie Ann Resnera', '150.01', '0.00', '0.00', '0.00', '150.01', 'Active', '2019-04-23 20:32:10'),
-(15, '2019-04-25', '0627016', 'Joshua Miguel Magtibay', '260.00', '0.00', '0.00', '0.00', '260.00', 'Active', '2019-04-25 09:52:10');
+(15, '2019-04-25', '0627016', 'Joshua Miguel Magtibay', '260.00', '0.00', '0.00', '0.00', '260.00', 'Active', '2019-04-25 09:52:10'),
+(16, '2019-04-25', '0627017', 'Mash Kyrielight', '1410.00', '0.00', '0.00', '0.00', '1410.00', 'Active', '2019-04-25 00:00:00'),
+(17, '2019-04-25', '0627018', 'Oliver Gabriel', '410.00', '0.00', '0.00', '0.00', '410.00', 'Active', '2019-04-25 15:19:45'),
+(18, '2019-04-25', '0627019', 'Lowell Dave Agnir', '360.00', '0.00', '0.00', '0.00', '360.00', 'Active', '2019-04-25 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -629,7 +664,9 @@ INSERT INTO `t_deposits` (`dep_ID`, `dep_acc_no`, `dep_slip_no`, `dep_amount`, `
 (3, '0682102047', '2019-003', '5710.00', 'DEPOSITED', '2019-04-15', '2019-04-16'),
 (4, '0682102047', '2019-004', '500.00', 'DEPOSITED', '2019-03-17', '2019-04-01'),
 (6, '0682102047', '2019-006', '650.00', 'DEPOSITED', '2019-04-17', '2019-04-17'),
-(7, '0682102047', '2019-007', '250.00', 'DEPOSITED', '2019-03-30', '2019-04-01');
+(7, '0682102047', '2019-007', '250.00', 'DEPOSITED', '2019-03-30', '2019-04-01'),
+(8, '0682102047', '2019-008', '2440.00', 'DEPOSITED', '2019-04-25', '2019-04-26'),
+(9, '0682102047', '2019-009', '0.00', 'DEPOSITED', '2019-04-24', '2019-04-25');
 
 -- --------------------------------------------------------
 
@@ -741,7 +778,9 @@ INSERT INTO `t_users_log` (`log_No`, `log_userID`, `log_usertype`, `log_datestam
 (64, 2, 2, '2019-04-24', '10:38:38'),
 (65, 1, 1, '2019-04-24', '10:39:00'),
 (66, 2, 2, '2019-04-25', '09:51:01'),
-(67, 2, 2, '2019-04-25', '09:51:52');
+(67, 2, 2, '2019-04-25', '09:51:52'),
+(68, 2, 2, '2019-04-25', '15:22:49'),
+(69, 2, 2, '2019-04-25', '17:37:23');
 
 --
 -- Indexes for dumped tables
@@ -834,6 +873,12 @@ ALTER TABLE `t_accounts`
   ADD KEY `FK_acc_emp` (`acc_empID`);
 
 --
+-- Indexes for table `t_cash_receipt_record`
+--
+ALTER TABLE `t_cash_receipt_record`
+  ADD PRIMARY KEY (`crt_ID`);
+
+--
 -- Indexes for table `t_cr_register_income_references`
 --
 ALTER TABLE `t_cr_register_income_references`
@@ -877,7 +922,7 @@ ALTER TABLE `t_users_log`
 -- AUTO_INCREMENT for table `f_lock_screen_log`
 --
 ALTER TABLE `f_lock_screen_log`
-  MODIFY `ls_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ls_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `f_user_permission`
@@ -946,22 +991,28 @@ ALTER TABLE `t_accounts`
   MODIFY `acc_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `t_cash_receipt_record`
+--
+ALTER TABLE `t_cash_receipt_record`
+  MODIFY `crt_ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `t_cr_register_income_references`
 --
 ALTER TABLE `t_cr_register_income_references`
-  MODIFY `cr_ir_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `cr_ir_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `t_cr_register_master`
 --
 ALTER TABLE `t_cr_register_master`
-  MODIFY `cr_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `cr_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `t_deposits`
 --
 ALTER TABLE `t_deposits`
-  MODIFY `dep_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `dep_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `t_employees`
@@ -973,7 +1024,7 @@ ALTER TABLE `t_employees`
 -- AUTO_INCREMENT for table `t_users_log`
 --
 ALTER TABLE `t_users_log`
-  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- Constraints for dumped tables

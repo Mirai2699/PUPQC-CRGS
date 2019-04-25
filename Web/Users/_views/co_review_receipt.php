@@ -54,7 +54,7 @@
                 <table style="margin: 10px">
                   <thead>
                     <th>Total Amount:</th>
-                    <th>₱ <?php echo $total;?></th>
+                    <th>₱ <?php echo $nf_total;?></th>
                   </thead>
                   <tbody>
                    <tr>
@@ -72,6 +72,8 @@
               
 
             </div>
+
+
             <div class="panel" style="padding: 1px; background-color: #262626; margin-top: 10px"></div>
             <button class="btn btn-primary" type="button" onclick="print();">
               <i class="fa fa-print"></i>

@@ -3,14 +3,17 @@
 		if(isset($_POST['add_deposit']))
 		{
 			add_deposit_today();
+			//add_cash_receipt_record();
 		}
 		else if(isset($_POST['deposit_otherday']))
 		{
 			add_deposit_other_day();
+			//add_cash_receipt_record();
 		}
 		else if(isset($_POST['toggle_deposit']))
 		{
 			toggle_deposit();
+			add_cash_receipt_record();
 		}
 
 		
@@ -179,6 +182,31 @@
 			         ('You have confirmed the deposit status of the record!');".
 			        "</script>";
 			echo "<script>setTimeout(\"location.href = '../_views/co_deposit_pending.php';\",0);</script>";
+		}
+
+		function add_cash_receipt_record()
+		{
+		  require('../../../db_con.php');
+		  $dep_ID = $_POST['dep_ID'];
+		  $dep_date_actual = $_POST['actual_date_deposit'];
+
+		  $view_query1 = mysqli_query($connection,"SELECT * FROM `t_deposits` 
+		                                          WHERE dep_ID = '$dep_ID'");
+		  while($row1 = mysqli_fetch_assoc($view_query1))
+		  {
+		      $dep_ID = $row1["dep_ID"];
+		      $dep_acc_no = $row1["dep_acc_no"];
+		      $dep_slip_no = $row1["dep_slip_no"];
+		      $dep_amount = $row1["dep_amount"];
+		  }
+		  $bank = 'LBP Acct. No. 0682102047';
+
+		  $today = date('Y-m-d h:i:s');
+		 
+		  $insert = "INSERT INTO `t_cash_receipt_record` (crt_date, crt_reference_no, crt_payor, crt_deposit)
+		                                          VALUES ('$dep_date_actual', '$dep_acc_no', '$bank', '$dep_amount' )";
+		  //print_r($insert);
+		  mysqli_query($connection, $insert);
 		}
 		
 ?>

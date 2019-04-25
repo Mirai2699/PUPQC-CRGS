@@ -269,3 +269,19 @@ CREATE TABLE t_accountable_forms_fv
 		CONSTRAINT FK_fv_acC_ID FOREIGN KEY(af_fv_person_in_charge)
 			REFERENCES t_accounts(acc_ID)
 );
+
+
+CREATE TABLE t_cash_receipt_record
+(
+	crt_ID int(10) AUTO_INCREMENT NOT NULL,
+	crt_date datetime NOT NULL, 
+	crt_reference_no varchar(10) NOT NULL,
+	crt_payor varchar(225) NOT NULL,
+	crt_mfm_pap varchar(10) NULL, 
+	crt_object_code varchar(10) NULL, 
+	crt_nat_col  varchar(255) NULL,
+	crt_collection DECIMAL(10,2) NULL,
+	crt_deposit DECIMAL(10,2) NULL,
+	crt_un_deposit DECIMAL(10,2) NULL,	
+		Primary key(crt_ID)
+);

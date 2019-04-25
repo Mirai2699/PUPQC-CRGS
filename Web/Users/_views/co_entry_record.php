@@ -168,6 +168,13 @@
                   <i class="fa fa-save"></i>
                   Save Entry
                 </button>
+
+               <!--  <button type="submit" class="btn btn-warning" name="test" style="font-size: 16px; margin-top: 23px;">
+                  <i class="fa fa-save"></i>
+                  TEST BUTTON
+                </button>
+ -->
+
               </div>
             </div>
             <!-- THIRD ROW -->
