@@ -9,16 +9,16 @@
    
   }
   .table1{
-      /*border: 1px solid black;*/
-      /*border-collapse: collapse;*/
+      border: 1px solid black;
+      border-collapse: collapse;
       text-align: center;
   }
 </style>
 
 <div style="display: none">
   <div id="printable" class="panel-body" style="color: black">
-     <div>
-       <table style="width: 100%; font-size: 11px; visibility: hidden;" >
+     <div style="border:1px solid black;">
+       <table style="width: 100%; font-size: 11px" >
          <tr>
            <td style="font-size: 11px">
              Accountable FORM No. 51-C
@@ -34,16 +34,16 @@
          </tr>
        </table>
        <?php include("../_access_views/get_view_details_official_receipt.php");?>
-       <table class="table1" style="width: 100%; font-size: 13px; ;">
+       <table class="table1" style="width: 100%; font-size: 13px;">
          <tr class="table1">
-           <td rowspan="2" class="table1" style="width: 100px; visibility: hidden">
+           <td rowspan="2" class="table1" style="width: 100px">
              (O)
            </td>
-           <td class="table1" style="font-size: 11px; width: 30px; visibility: hidden">
+           <td class="table1" style="font-size: 11px; width: 30px">
             Official Receipt of the<br>
             Republic of the Philippines
            </td>
-           <td rowspan="2" class="table1" style="width: 100px; visibility: hidden">
+           <td rowspan="2" class="table1" style="width: 100px">
              (O)
            </td>
          </tr>
@@ -57,21 +57,21 @@
        <table class="table1" style="width: 100%; font-size: 13px;">
          <tr class="table1">
            <td class="table1" style="text-align: left">
-             &nbsp;&nbsp;&nbsp;&nbsp; 05 2 06 441
+             Fund: 05 2 06 441
            </td>
            <td class="table1" style="text-align: left">
-             &nbsp;&nbsp;&nbsp;&nbsp; <?php echo $cr_nf_date_payment; ?>
+             Date: <?php echo $cr_nf_date_payment; ?>
            </td>
          </tr>
        </table>
-       <center style="visibility: hidden;">
+       <center>
         <b style="font-size: 12px; font-family: arial">POLYTECHNIC UNIVERSITY OF THE PHILIPPINES</b>
        </center>
-       <hr style="visibility: hidden">
+       <hr>
 
-       <pre style="font-size: 9px; font-family: arial">&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $cr_payor; ?></pre>
+       <pre style="font-size: 9px; font-family: arial">Payor: <?php echo $cr_payor; ?></pre>
        <table  class="table1"style="height:300px; width: 100%">
-         <thead style="visibility: hidden">
+         <thead>
            <th class="table1" style="font-size: 9px">Nature of Collection</th>
            <th class="table1" style="font-size: 9px">Account Code</th>
            <th class="table1" style="font-size: 9px">Amount</th>
@@ -94,11 +94,11 @@
                    $part_amount = $row_part['cr_ir_amount'];
                    $display_part = '
                                     <tr style="height: 15px">
-                                      <td style="font-size: 10px; text-align:  left">
+                                      <td style="border-left: 1px solid black; font-size: 10px; text-align:  left">
                                          '.$part_desc.'
                                       </td>
-                                      <td style="font-size: 10px; text-align:  left"></td>
-                                      <td style="font-size: 10px; text-align:  right">
+                                      <td style="border-left: 1px solid black; font-size: 10px; text-align:  left"></td>
+                                      <td style="border-left: 1px solid black; font-size: 10px; text-align:  right">
                                          ₱ '.$part_amount.'
                                       </td>
                                      </tr>';
@@ -118,19 +118,21 @@
              <td class="table1" style="font-size: 10px; text-align: right">₱ <?php echo $total; ?></td>
            </tr>
            <tr style="height: 20px">
-             <td class="table1" colspan="3" style="font-size: 9px; text-align: left; visibility: hidden">Amount in Words</td>
+             <td class="table1" colspan="3" style="font-size: 9px; text-align: left;">Amount in Words</td>
            </tr>
            <tr style="height: 10px">
              <td class="table1" colspan="3" style="font-size: 9px; text-align: left;"></td>
          </tbody>
        </table>
 
-       <table class="table1" style="width:100%; font-size: 9px; visibility: hidden;">
+       <table class="table1" style="width:100%; font-size: 9px">
          <tr>
            <td class="table1" rowspan="4" style="text-align: left">
              <input type="checkbox"> Cash<br>
              <input type="checkbox"> Check<br>
-             <input type="checkbox"> Mon           <td class="table1" style="text-align: center; font-weight: bold">Drawee Bank</td>
+             <input type="checkbox"> Money Order<br>
+           </td>
+           <td class="table1" style="text-align: center; font-weight: bold">Drawee Bank</td>
            <td class="table1" style="text-align: center; font-weight: bold">Number</td>
            <td class="table1" style="text-align: center; font-weight: bold">Date</td>
          </tr>
@@ -151,8 +153,8 @@
          </tr>
        </table>
 
-       <p style="font-size: 10px; visibility: hidden">Received the amount stated above.</p>
-       <p style="font-size: 9px; text-align: center"><u>___Ms. Merly B. Gonzalbo____</u><br>
+       <p style="font-size: 10px">Received the amount stated above.</p>
+       <p style="font-size: 9px; text-align: center">______________________________________<br>Collecting Officer
        </p>
       </div>
 

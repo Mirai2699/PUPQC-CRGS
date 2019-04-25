@@ -87,7 +87,10 @@
   </div>
   <!-- end page container -->
   
-  <?php include("../_access_views/printable_receipt.php");?>
+  <?php 
+    include("../_access_views/printable_receipt.php");
+    //include("../_access_views/printable_receipt_with_border.php");
+  ?>
   <!--ON PAGE SCRIPTS--><!-- 
   <script>
     $(document).ready(function() {
