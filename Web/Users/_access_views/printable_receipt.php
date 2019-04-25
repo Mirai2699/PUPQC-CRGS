@@ -2,6 +2,7 @@
 <style type="text/css">
   @page {
     size:4in 6in;
+    /*size:letter;*/
     margin-top: 0in; 
     margin-left: 0.2in;
     margin-right: 0.2in;
@@ -18,7 +19,7 @@
 <div style="display: none">
   <div id="printable" class="panel-body" style="color: black">
      <div>
-       <table style="width: 100%; font-size: 11px; visibility: hidden;" >
+       <!-- <table style="width: 100%; font-size: 11px; visibility: hidden;" >
          <tr>
            <td style="font-size: 11px">
              Accountable FORM No. 51-C
@@ -32,9 +33,9 @@
              (ORIGINAL)
            </td>
          </tr>
-       </table>
+       </table> -->
        <?php include("../_access_views/get_view_details_official_receipt.php");?>
-       <table class="table1" style="width: 100%; font-size: 13px; ;">
+       <!-- <table class="table1" style="width: 100%; font-size: 13px; ;">
          <tr class="table1">
            <td rowspan="2" class="table1" style="width: 100px; visibility: hidden">
              (O)
@@ -52,7 +53,7 @@
              No. <?php echo $cr_or_num; ?>
            </td>
          </tr>
-       </table>
+       </table> -->
 
        <table class="table1" style="width: 100%; font-size: 13px;">
          <tr class="table1">
