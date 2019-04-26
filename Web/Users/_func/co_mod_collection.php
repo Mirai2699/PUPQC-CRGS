@@ -67,6 +67,51 @@
 
         }
 
+        function add_cash_receipt_record()
+        {
+          require('../../../db_con.php');
+          $cr_ornum = $_POST['cr_ornum'];
+          //$cr_payor = $_POST['cr_payor'];
+          if(!empty($_POST['cr_lastname']) && !empty($_POST['cr_firstname']))
+          {
+            $cr_lname = $_POST['cr_lastname']; 
+            $cr_fname = $_POST['cr_firstname'];
+            $cr_payor = $cr_lname.', '.$cr_fname;
+          } 
+          else
+          {
+            $cr_payor = $_POST['cr_company_payor'];
+          } 
+          $cr_total_payment = $_POST['cr_total'];
+
+
+          $arr = $_POST; 
+          $all_particulars = '';
+          for($i = 0; $i <= count($arr['cr_uacs'])-1;$i++)
+          {   
+
+              $cr_uacs = $arr['cr_uacs'][$i];
+
+
+              $get_particulars = mysqli_query($connection, "SELECT * FROM `r_uacs` 
+                                                                     WHERE uacs_ID = '$cr_uacs'
+                                                                    ");
+              
+              while($row_part = mysqli_fetch_assoc($get_particulars))
+              {
+                $part_desc = $row_part['uacs_acc_title'];
+               
+              }
+              $all_particulars = $all_particulars.''.$part_desc.',';
+          }
+          $today = date('Y-m-d h:i:s');
+         
+          $insert = "INSERT INTO `t_cash_receipt_record` (crt_date, crt_reference_no, crt_payor, crt_nat_col, crt_collection, crt_un_deposit)
+                                                  VALUES ('$today', '$cr_ornum', '$cr_payor', '$all_particulars', '$cr_total_payment', '$cr_total_payment' )";
+          //print_r($insert);
+          mysqli_query($connection, $insert);
+        }
+
       
 ?>
 

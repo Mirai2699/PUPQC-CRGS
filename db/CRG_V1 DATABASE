@@ -113,6 +113,15 @@ CREATE TABLE r_fund_cluster
 	
 );
 
+CREATE TABLE r_payor_type
+(
+	pyt_ID int(10) AUTO_INCREMENT NOT NULL,
+	pyt_desc varchar(30) NOT NULL,
+	pyt_timestamp datetime NOT NULL,
+	pyt_active_stat varchar(10) DEFAULT "Active" NOT NULL,
+		Primary key(pyt_ID)
+);
+
 
 CREATE TABLE r_uacs_type
 (
@@ -160,6 +169,7 @@ CREATE TABLE t_cr_register_master
 	cr_ID int(10) AUTO_INCREMENT NOT NULL,
 	cr_date_payment date NOT NULL,
 	cr_or_num varchar(20) NOT NULL,
+	cr_payor_type varchar(30) NOT NULL,
 	cr_payor varchar(200) NOT NULL,
 	cr_receipt DECIMAL(10,2) NOT NULL,
 	cr_dep_nat_treasure DECIMAL(10,2) NULL,

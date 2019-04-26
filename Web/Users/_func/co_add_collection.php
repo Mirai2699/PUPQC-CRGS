@@ -54,8 +54,11 @@
         { 
             require('../../../db_con.php');
             $cr_ornum = $_POST['cr_ornum'];
-            $cr_payor = $_POST['cr_payor'];
+            //$cr_payor = $_POST['cr_payor'];
             $cr_receipt = $_POST['cr_receipt'];
+            $cr_payor_type = $_POST['cr_payor_type'];
+
+
 
             if(!empty($_POST['cr_treasure']))
             {
@@ -81,6 +84,16 @@
             {
                $cr_balance = NULL;
             }
+            if(!empty($_POST['cr_lastname']) && !empty($_POST['cr_firstname']))
+            {
+              $cr_lname = $_POST['cr_lastname']; 
+              $cr_fname = $_POST['cr_firstname'];
+              $cr_payor = $cr_lname.', '.$cr_fname;
+            } 
+            else
+            {
+              $cr_payor = $_POST['cr_company_payor'];
+            } 
            
 
             $cr_total_payment = $_POST['cr_total'];
@@ -90,6 +103,7 @@
 
              $insert = "INSERT INTO t_cr_register_master(cr_date_payment,
                                                          cr_or_num,
+                                                         cr_payor_type,
                                                          cr_payor,
                                                          cr_receipt,
                                                          cr_dep_nat_treasure,
@@ -100,6 +114,7 @@
                                                         )     
                                                  VALUES ('$today',
                                                          '$cr_ornum',
+                                                         '$cr_payor_type',
                                                          '$cr_payor',
                                                          '$cr_receipt',
                                                          '$cr_dep_nat_signature',
@@ -108,8 +123,9 @@
                                                          '$cr_total_payment',
                                                          '$today'
                                                         )";
-                  
-              mysqli_query($connection,$insert);
+              //print_r($insert);  
+             mysqli_query($connection,$insert);
+
 
         }
 
@@ -159,7 +175,17 @@
         {
           require('../../../db_con.php');
           $cr_ornum = $_POST['cr_ornum'];
-          $cr_payor = $_POST['cr_payor'];
+          //$cr_payor = $_POST['cr_payor'];
+          if(!empty($_POST['cr_lastname']) && !empty($_POST['cr_firstname']))
+          {
+            $cr_lname = $_POST['cr_lastname']; 
+            $cr_fname = $_POST['cr_firstname'];
+            $cr_payor = $cr_lname.', '.$cr_fname;
+          } 
+          else
+          {
+            $cr_payor = $_POST['cr_company_payor'];
+          } 
           $cr_total_payment = $_POST['cr_total'];
 
 

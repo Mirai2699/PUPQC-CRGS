@@ -47,9 +47,55 @@
                   <label>OR/DS Number</label>
                   <input type="text" class="form-control" name="cr_ornum" style="font-size: 15px; color: black; font-weight: bold" readonly value="<?php echo $or_num;?>" required/>
               </div>
-              <div class="col-md-4">
-                  <label>Payor</label>
-                  <input type="text" class="form-control" name="cr_payor" style="font-size: 15px; color: black" required/>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row" style="margin-top: 10px; margin-left: 5px">
+                  <div class="col-md-3" style="border: 1px solid">
+                    <label style="font-size: 15px">Payor Type:</label><br>
+                    <div class="radio radio-css radio-inline">
+                      <input type="radio" id="cr_indiv_payor" name="cr_payor_type" value="Individual" required onclick="cr_individual();" />
+                      <label for="cr_indiv_payor" style="font-size: 15px">Individual</label>
+                    </div>
+                    <div class="radio radio-css radio-inline">
+                      <input type="radio" id="cr_company_name" name="cr_payor_type" value="Company" required onclick="cr_company();" />
+                      <label for="cr_company_name" style="font-size: 15px">Company</label>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-3" >
+                      <label style="font-size: 18px">Payor Type</label>
+                      <select class="form-control" name="" style="font-size:14px">
+                        <option value="" selected disabled> -- Select Type -- </option>
+                        <?php
+                          $view_type = mysqli_query($connection, "SELECT * FROM `r_payor_type` where pyt_active_stat = 'Active' ");
+                          while($row_type = mysqli_fetch_assoc($view_type))
+                          {
+                            $pyt_ID = $row_type['pyt_ID'];
+                            $pyt_desc = $row_type['pyt_desc'];
+
+                        ?>
+                        <option value="<?php echo $pyt_ID; ?>" style="font-size:14px"><?php echo $pyt_desc; ?></option>
+                        <?php } ?>
+                      </select>
+                  </div> -->
+                  <div class="col-md-5" id="cr_null_type">
+                      <p style="font-size: 20px; margin-top: 20px"> -- (Select Payor Type First) -- </p>
+                  </div>
+
+                  <div class="col-md-3" id="cr_lname" style="display: none">
+                      <label style="font-size: 18px">Last Name:</label>
+                      <input id="cr_inp_lname" type="text" class="form-control" name="cr_lastname" style="font-size: 20px; color: black" required/>
+                  </div>
+                  <div class="col-md-3" id="cr_fname" style="display: none">
+                      <label style="font-size: 18px">First Name:</label>
+                      <input id="cr_inp_fname" type="text" class="form-control" name="cr_firstname" style="font-size: 20px; color: black" required/>
+                  </div>
+
+                  <div class="col-md-5" id="cr_company" style="display: none">
+                      <label style="font-size: 18px">Company's Name</label>
+                      <input id="cr_inp_comp" type="text" class="form-control" name="cr_company_payor" style="font-size: 20px; color: black" required/>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- FIRST ROW -->
@@ -307,6 +353,28 @@
             });
             console.log(total);
             $("input[id='total']").val(total);
+          }
+          function cr_individual()
+          {
+              $("#cr_null_type").prop("disabled", true).hide();
+              $("#cr_company").prop("disabled", true).hide();
+              $("#cr_inp_comp").prop("disabled", true);
+              $("#cr_lname").prop("disabled", false).toggle("slide");
+              $("#cr_fname").prop("disabled", false).toggle("slide");
+
+              $("#cr_inp_lname").prop("disabled", false);
+              $("#cr_inp_fname").prop("disabled", false);
+          }
+          function cr_company()
+          {
+              $("#cr_null_type").prop("disabled", true).hide();
+              $("#cr_lname").prop("disabled", true).hide();
+              $("#cr_fname").prop("disabled", true).hide();
+              $("#cr_inp_lname").prop("disabled", true);
+              $("#cr_inp_fname").prop("disabled", true);
+
+              $("#cr_company").prop("disabled", false).toggle("slide");
+              $("#cr_inp_comp").prop("disabled", false);
           }
 
 
