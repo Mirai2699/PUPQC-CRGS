@@ -204,7 +204,7 @@
 		  $today = date('Y-m-d h:i:s');
 		 
 		  $insert = "INSERT INTO `t_cash_receipt_record` (crt_date, crt_reference_no, crt_payor, crt_deposit)
-		                                          VALUES ('$dep_date_actual', '$dep_acc_no', '$bank', '$dep_amount' )";
+		                                          VALUES ('$dep_date_actual', '$dep_slip_no', '$bank', '$dep_amount' )";
 		  //print_r($insert);
 		  mysqli_query($connection, $insert);
 		}

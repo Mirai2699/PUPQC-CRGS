@@ -10,6 +10,7 @@
          require('../../../db_con.php');
 
          mod_payment();
+         add_cash_receipt_record();
          update_or_stat();
         
          $get_max = mysqli_query($connection, "SELECT MAX(cr_ID) AS LAST FROM `t_cr_register_master`");
@@ -70,44 +71,39 @@
         function add_cash_receipt_record()
         {
           require('../../../db_con.php');
-          $cr_ornum = $_POST['cr_ornum'];
+          $cr_master_ID = $_POST['cr_master_ID'];
           //$cr_payor = $_POST['cr_payor'];
-          if(!empty($_POST['cr_lastname']) && !empty($_POST['cr_firstname']))
+          
+          $get_official_receipt = mysqli_query($connection,"SELECT * FROM `t_cr_register_master` AS CRM 
+                                                                  INNER JOIN `t_cr_register_income_references` AS CRIR
+                                                                  ON CRM.cr_or_num = CRIR.cr_ir_ornum_ref
+                                                            WHERE cr_or_num = '$cr_master_ID'");
+          while($row = mysqli_fetch_assoc($get_official_receipt))
           {
-            $cr_lname = $_POST['cr_lastname']; 
-            $cr_fname = $_POST['cr_firstname'];
-            $cr_payor = $cr_lname.', '.$cr_fname;
-          } 
-          else
-          {
-            $cr_payor = $_POST['cr_company_payor'];
-          } 
-          $cr_total_payment = $_POST['cr_total'];
-
-
-          $arr = $_POST; 
-          $all_particulars = '';
-          for($i = 0; $i <= count($arr['cr_uacs'])-1;$i++)
-          {   
-
-              $cr_uacs = $arr['cr_uacs'][$i];
-
-
-              $get_particulars = mysqli_query($connection, "SELECT * FROM `r_uacs` 
-                                                                     WHERE uacs_ID = '$cr_uacs'
-                                                                    ");
-              
-              while($row_part = mysqli_fetch_assoc($get_particulars))
-              {
-                $part_desc = $row_part['uacs_acc_title'];
-               
-              }
-              $all_particulars = $all_particulars.''.$part_desc.',';
+              $cr_or_num = $row["cr_or_num"];
+              $cr_payor = $row["cr_payor"];
+              $cr_total_payment = $row["cr_total_payment"];
           }
-          $today = date('Y-m-d h:i:s');
+
+         
+          
+            $get_particulars = mysqli_query($connection, "SELECT * FROM `t_cr_register_income_references` AS CRIR2
+                                                                    INNER JOIN `r_uacs` AS UACS
+                                                                    ON CRIR2.cr_ir_uac_ID_ref = UACS.uacs_ID
+                                                                    WHERE CRIR2.cr_ir_ornum_ref = '$cr_or_num'");
+            $all_particulars = ''; 
+            while($row_part = mysqli_fetch_assoc($get_particulars))
+            {
+                $part_desc = $row_part['uacs_acc_title'];
+                $all_particulars = $all_particulars.''.$part_desc.',';
+                   
+            }
+            
+          
+  
          
           $insert = "INSERT INTO `t_cash_receipt_record` (crt_date, crt_reference_no, crt_payor, crt_nat_col, crt_collection, crt_un_deposit)
-                                                  VALUES ('$today', '$cr_ornum', '$cr_payor', '$all_particulars', '$cr_total_payment', '$cr_total_payment' )";
+                                                  VALUES (CURRENT_TIMESTAMP, '$cr_or_num', '$cr_payor', '$all_particulars', '$cr_total_payment', '$cr_total_payment' )";
           //print_r($insert);
           mysqli_query($connection, $insert);
         }

@@ -15,88 +15,80 @@
           <tr>
               <th colspan="3">IRYNNE P. GATCHALIAN <br> Accountable Officer</th>
               <th colspan="3">Collecting and Disbursing Officer <br> Official Designation</th>
-              <th colspan="2">PUP Quezon City <br> Station</th>
+              <th colspan="3">PUP Quezon City <br> Station</th>
+              
           </tr>
           </thead>
           <tbody>
       ';
       echo
-      '
-        <tr>
-            <td>Date</td>
-            <td>Reference</td>
-            <td>Payor</td>
-            <td>UACS Code
-              
+      '  <tr style="text-align: center">
+            <td rowspan="2">Date</td>
+            <td rowspan="2">Reference <br>
+                            No./.OR   <br>
+                            No./DS
             </td>
-            <td>Nature<br> of<br> Collection</td>
-            <td>Collection</td>
-            <td>Deposit</td>
-            <td>Undeposited<br>Collection</td>
+            <td rowspan="2">Payor</td>
+            <td colspan="2"> UACS Code</td>
+            <td rowspan="2">Nature<br> of<br> Collection</td>
+            <td rowspan="2">Collection</td>
+            <td rowspan="2">Deposit</td>
+            <td rowspan="2" colspan="2">Undeposited<br>Collection</td>
+            
+        </tr>
+      ';
+      echo
+      ' <tr style="text-align: center">
+            <td scope="row">MFM/PAP</td>
+            <td>Object Code</td>
         </tr>
       ';
       
-      $view_query = mysqli_query($connection,"SELECT * FROM `t_cr_register_master` AS CRM 
-                                                       INNER JOIN `t_cr_register_income_references` AS CRIR
-                                                       ON CRM.cr_or_num = CRIR.cr_ir_ornum_ref 
-                                                       LEFT OUTER JOIN `t_deposits` AS DEP
-                                                       ON CRM.cr_date_payment = DEP.dep_date_actual
-                                                       GROUP BY CRM.cr_or_num
-                                                       ORDER BY CRM.cr_or_num ASC ");
+      
+      $view_query = mysqli_query($connection,"SELECT * FROM `t_cash_receipt_record` 
+                                                       ORDER BY crt_ID ASC ");
       while($row = mysqli_fetch_assoc($view_query))
       {
-        $or_num = $row['cr_or_num'];
-        $or_payor = $row['cr_payor'];
-        $amount = $row['cr_total_payment'];
-        $date = new datetime($row['cr_date_payment']);
-        $nf_date = $date->format('F d');
-        $dep_slip_no = $row['dep_slip_no'];
+        
+        $date = new datetime($row['crt_date']);
+        $nf_date = $date->format('M d');
 
-       
-        $get_particulars = mysqli_query($connection, "SELECT * FROM `t_cr_register_income_references` AS CRIR2
-                                                              INNER JOIN `r_uacs` AS UACS
-                                                              ON CRIR2.cr_ir_uac_ID_ref = UACS.uacs_ID
-                                                              WHERE CRIR2.cr_ir_ornum_ref = '$or_num'
-                                                              ");
-        $all_particulars = '';
-        while($row_part = mysqli_fetch_assoc($get_particulars))
-        {
-          $part_desc = $row_part['uacs_acc_title'];
-          $all_particulars = $all_particulars.''.$part_desc.',';
-        }
+        $ref_no = $row['crt_reference_no'];
+        $payor = $row['crt_payor'];
+        $crt_mfm_pap = $row['crt_mfm_pap'];
+        $crt_obj_code = $row['crt_object_code'];
+        $crt_nat_col = $row['crt_nat_col'];
+        $crt_collection = $row['crt_collection'];
+        $crt_deposit = $row['crt_deposit'];
+        $crt_un_deposit = $row['crt_un_deposit'];
+
         echo
         '
           <tr>
-              <td>'.$nf_date.'</td>
-              <td>'.$or_num.'</td>
-              <td>'.$or_payor.'</td>
-              <td></td>
-              <td>'
-                   .$all_particulars.
+              <td rowspan="2">'.$nf_date.'</td>
+              <td rowspan="2">'.$ref_no.'</td>
+              <td rowspan="2">'.$payor.'</td>
+              <td colspan="2"></td>
+              <td rowspan="2">
+              '
+                   .$crt_nat_col.
               '</td>
-              <td>'.$amount.'</td>
+              <td rowspan="2">'.$crt_collection.'</td>
+              <td rowspan="2">'.$crt_deposit.'</td>
+              <td rowspan="2">'.$crt_un_deposit.'</td>
+          </tr>
+        ';
+        echo
+        ' <tr style="text-align: center">
               <td></td>
-              <td>'.$amount.'</td>
+              <td></td>
           </tr>
         ';
         
 
 
       }
-      echo
-      '
-        <tr>
-            <td>'.$nf_date.'</td>
-            <td>'.$dep_slip_no.'</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>'.$amount.'</td>
-            <td></td>
-        </tr>
-      ';
-     
+   
 
 
 

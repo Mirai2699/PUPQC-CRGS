@@ -211,7 +211,7 @@
           $today = date('Y-m-d h:i:s');
          
           $insert = "INSERT INTO `t_cash_receipt_record` (crt_date, crt_reference_no, crt_payor, crt_nat_col, crt_collection, crt_un_deposit)
-                                                  VALUES ('$today', '$cr_ornum', '$cr_payor', '$all_particulars', '$cr_total_payment', '$cr_total_payment' )";
+                                                  VALUES (CURRENT_TIMESTAMP, '$cr_ornum', '$cr_payor', '$all_particulars', '$cr_total_payment', '$cr_total_payment' )";
           //print_r($insert);
           mysqli_query($connection, $insert);
         }
