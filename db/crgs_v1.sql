@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2019 at 05:51 AM
+-- Generation Time: Apr 27, 2019 at 11:44 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 5.6.36
 
@@ -114,7 +114,7 @@ CREATE TABLE `r_deposit_account` (
 --
 
 INSERT INTO `r_deposit_account` (`dpac_ID`, `dpac_acc_no`, `dpac_bank`, `dpac_starting_count`, `dpac_mod_date`) VALUES
-(1, '0682102047', 'LBP', 10, '2019-04-16');
+(1, '0682102047', 'LBP', 3, '2019-04-16');
 
 -- --------------------------------------------------------
 
@@ -214,8 +214,8 @@ INSERT INTO `r_official_receipt` (`or_ID`, `or_no`, `or_status`, `or_create_date
 (3, '0306126', 'PAID', '2019-04-01'),
 (4, '0306127', 'PAID', '2019-04-01'),
 (5, '0306128', 'PAID', '2019-04-01'),
-(6, '0306129', 'PENDING', '2019-04-01'),
-(7, '0306130', 'PENDING', '2019-04-01'),
+(6, '0306129', 'PAID', '2019-04-01'),
+(7, '0306130', 'PAID', '2019-04-01'),
 (8, '0306131', 'PENDING', '2019-04-01'),
 (9, '0306132', 'PENDING', '2019-04-01'),
 (10, '0306133', 'PENDING', '2019-04-01'),
@@ -851,7 +851,11 @@ CREATE TABLE `t_cash_receipt_record` (
 
 INSERT INTO `t_cash_receipt_record` (`crt_ID`, `crt_date`, `crt_reference_no`, `crt_payor`, `crt_mfm_pap`, `crt_object_code`, `crt_nat_col`, `crt_collection`, `crt_deposit`, `crt_un_deposit`) VALUES
 (1, '2019-04-26 05:35:41', '0306126', '', NULL, NULL, 'Tuition Fees,Completion,', '700.00', NULL, '700.00'),
-(2, '2019-04-26 05:40:30', '0306127', '', NULL, NULL, 'Clearance and Certification Fee,Fines and Penalties-Service In,Transcript of Records Fee,Readmission,ID,Diploma,Graduation Fee,Toga,School Uniform,', '2260.00', NULL, '2260.00');
+(2, '2019-04-26 05:40:30', '0306127', '', NULL, NULL, 'Clearance and Certification Fee,Fines and Penalties-Service In,Transcript of Records Fee,Readmission,ID,Diploma,Graduation Fee,Toga,School Uniform,', '2260.00', NULL, '2260.00'),
+(3, '2019-04-26 12:38:51', '0306129', 'Resnera, Julie Ann', NULL, NULL, 'ID,Change Subject ,', '120.00', NULL, '120.00'),
+(4, '2019-04-27 00:00:00', '0682102047', 'LBP Acct. No. 0682102047', NULL, NULL, NULL, NULL, '5130.00', NULL),
+(5, '2019-04-27 15:35:22', '0306130', 'Magtibay, Joshua Miguel', NULL, NULL, 'Clearance and Certification Fee,Fines and Penalties-Service In,', '450.00', NULL, '450.00'),
+(6, '2019-04-27 00:00:00', '2019-002', 'LBP Acct. No. 0682102047', NULL, NULL, NULL, NULL, '450.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -891,7 +895,11 @@ INSERT INTO `t_cr_register_income_references` (`cr_ir_ID`, `cr_ir_ornum_ref`, `c
 (24, '0306127', '2019-04-26', 4, 65, '100.00', 'Active', '2019-04-26 11:40:30'),
 (25, '0306127', '2019-04-26', 4, 69, '700.00', 'Active', '2019-04-26 11:40:30'),
 (26, '0306128', '2019-04-26', 3, 40, '30.00', 'Active', '2019-04-26 11:49:56'),
-(27, '0306128', '2019-04-26', 3, 45, '70.00', 'Active', '2019-04-26 11:49:56');
+(27, '0306128', '2019-04-26', 3, 45, '70.00', 'Active', '2019-04-26 11:49:56'),
+(28, '0306129', '2019-04-26', 3, 3, '60.00', 'Active', '2019-04-26 12:38:51'),
+(29, '0306129', '2019-04-26', 3, 20, '60.00', 'Active', '2019-04-26 12:38:51'),
+(30, '0306130', '2019-04-27', 1, 1, '150.00', 'Active', '2019-04-27 15:35:20'),
+(31, '0306130', '2019-04-27', 1, 2, '300.00', 'Active', '2019-04-27 15:35:21');
 
 -- --------------------------------------------------------
 
@@ -923,7 +931,9 @@ INSERT INTO `t_cr_register_master` (`cr_ID`, `cr_date_payment`, `cr_or_num`, `cr
 (3, '2019-04-26', '0306125', 'Individual', 'Agnir, Lowell Dave', '950.00', '0.00', '0.00', '0.00', '950.00', 'Active', '2019-04-26 11:11:03'),
 (4, '2019-04-26', '0306126', 'Individual', 'Maglaque, Gerard', '700.00', '0.00', '0.00', '0.00', '700.00', 'Active', '2019-04-26 00:00:00'),
 (5, '2019-04-26', '0306127', 'Company', 'Beezgeek ', '2260.00', '0.00', '0.00', '0.00', '2260.00', 'Active', '2019-04-26 00:00:00'),
-(6, '2019-04-26', '0306128', 'Individual', 'Dizon, Malene', '100.00', '0.00', '0.00', '0.00', '100.00', 'Active', '2019-04-26 11:49:56');
+(6, '2019-04-26', '0306128', 'Individual', 'Dizon, Malene', '100.00', '0.00', '0.00', '0.00', '100.00', 'Active', '2019-04-26 11:49:56'),
+(7, '2019-04-26', '0306129', 'Individual', 'Resnera, Julie Ann', '120.00', '0.00', '0.00', '0.00', '120.00', 'Active', '2019-04-26 12:38:51'),
+(8, '2019-04-27', '0306130', 'Individual', 'Magtibay, Joshua Miguel', '450.00', '0.00', '0.00', '0.00', '450.00', 'Active', '2019-04-27 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -940,6 +950,14 @@ CREATE TABLE `t_deposits` (
   `dep_date_for` date NOT NULL,
   `dep_date_actual` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_deposits`
+--
+
+INSERT INTO `t_deposits` (`dep_ID`, `dep_acc_no`, `dep_slip_no`, `dep_amount`, `dep_status`, `dep_date_for`, `dep_date_actual`) VALUES
+(1, '0682102047', '2019-001', '5130.00', 'DEPOSITED', '2019-04-26', '2019-04-27'),
+(2, '0682102047', '2019-002', '450.00', 'DEPOSITED', '2019-04-27', '2019-04-27');
 
 -- --------------------------------------------------------
 
@@ -986,7 +1004,9 @@ CREATE TABLE `t_users_log` (
 
 INSERT INTO `t_users_log` (`log_No`, `log_userID`, `log_usertype`, `log_datestamp`, `log_timestamp`) VALUES
 (1, 2, 2, '2019-04-26', '10:56:20'),
-(2, 2, 2, '2019-04-26', '11:49:45');
+(2, 2, 2, '2019-04-26', '11:49:45'),
+(3, 2, 2, '2019-04-26', '12:39:27'),
+(4, 2, 2, '2019-04-27', '15:35:49');
 
 --
 -- Indexes for dumped tables
@@ -1212,25 +1232,25 @@ ALTER TABLE `t_accounts`
 -- AUTO_INCREMENT for table `t_cash_receipt_record`
 --
 ALTER TABLE `t_cash_receipt_record`
-  MODIFY `crt_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `crt_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `t_cr_register_income_references`
 --
 ALTER TABLE `t_cr_register_income_references`
-  MODIFY `cr_ir_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `cr_ir_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `t_cr_register_master`
 --
 ALTER TABLE `t_cr_register_master`
-  MODIFY `cr_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `cr_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `t_deposits`
 --
 ALTER TABLE `t_deposits`
-  MODIFY `dep_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `dep_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `t_employees`
@@ -1242,7 +1262,7 @@ ALTER TABLE `t_employees`
 -- AUTO_INCREMENT for table `t_users_log`
 --
 ALTER TABLE `t_users_log`
-  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
