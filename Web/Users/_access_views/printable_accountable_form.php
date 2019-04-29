@@ -488,7 +488,7 @@
         <p style="font-family: arial">
           <b>MS. MERLY B. GONZALBO</b><br>
           Collecting Officer<br>
-          <?php echo date('F d, Y');?> 
+          <!-- <?php echo date('F d, Y');?>  -->
         </p>
      </div>
   </div>

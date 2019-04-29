@@ -34,19 +34,8 @@
 
             <p style="font-size: 17px">Today's Date:<br><b> <?php echo date('F d, Y'); ?></b></p>
             <div class="row">
-              <?php
-                $currmonth = date('m');
-                $select_or = mysqli_query($connection, "SELECT or_no FROM `r_official_receipt` WHERE month(or_create_date) = '$currmonth' and or_status = 'PENDING' LIMIT 1");
-                while($row = mysqli_fetch_assoc($select_or))
-                {
-                  $or_num = $row['or_no'];
-                }
-
-              ?>
-              <div class="col-md-3">
-                  <label>OR/DS Number</label>
-                  <input type="text" class="form-control" name="cr_ornum" style="font-size: 15px; color: black; font-weight: bold" readonly value="<?php echo $or_num;?>" required/>
-              </div>
+              <table id="TableBody" style="margin-left: 15px">
+              </table>
             </div>
             <div class="row">
               <div class="col-md-12">
@@ -314,7 +303,31 @@
       },5000);
     });
   </script> -->
-   
+   <script type="text/javascript">
+     function TableData(){
+       $.ajax({
+             url:'../_access_views/get_view_table_current_OR.php',
+             type:'GET',
+             async:true,
+             success:function(data){
+               $('#TableBody').empty();
+               $('#TableBody').html(data);
+             },
+             error:function(){
+
+             }
+           });
+     }
+     //FOR REALTIME (DISABLED)
+
+     $(document).ready(function(){
+        TableData();
+          setInterval(function(){
+            TableData();
+          },5000);
+        });
+     </script>
+
    <script>
           $('.form-content').multifield({
               section: '.group',
