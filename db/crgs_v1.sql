@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2019 at 03:03 PM
+-- Generation Time: May 03, 2019 at 06:53 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -852,7 +852,9 @@ INSERT INTO `t_users_log` (`log_No`, `log_userID`, `log_usertype`, `log_datestam
 (3, 2, 2, '2019-04-01', '14:57:22'),
 (4, 2, 2, '2019-04-01', '15:07:50'),
 (5, 2, 2, '2019-04-02', '20:59:07'),
-(6, 2, 2, '2019-04-02', '20:59:31');
+(6, 2, 2, '2019-04-02', '20:59:31'),
+(7, 2, 2, '2019-05-02', '20:29:18'),
+(8, 2, 2, '2019-05-03', '10:08:44');
 
 --
 -- Indexes for dumped tables
@@ -1108,7 +1110,7 @@ ALTER TABLE `t_employees`
 -- AUTO_INCREMENT for table `t_users_log`
 --
 ALTER TABLE `t_users_log`
-  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `log_No` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

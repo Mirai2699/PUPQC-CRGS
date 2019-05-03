@@ -5,8 +5,11 @@
   include("../../utilities/navibar.php");
   include("../../utilities/BaseJs.php");
   include("../../utilities/Table_Default.php");
+  
+
 
 ?> 
+
     <title><?php echo $title_name; ?> | PUPQC-CRGS</title>
    
     <!-- begin #content -->
@@ -39,7 +42,7 @@
                 <input type="date" class="form-control" name="end_date">
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-5">
               <div class="row" style="margin-top: 26px">
                 <button class="btn btn-info" type="submit" name="filter_date">
                   <i class="fa fa-sync"></i>
@@ -50,12 +53,23 @@
                   <i class="fa fa-print"></i>
                   Print Report
                 </button>
+                </form>
+                 &nbsp;&nbsp;&nbsp;&nbsp;
+                <form method="POST" action="../_func/export_co_summ_collection.php">
+                    <button class="btn btn-success" type="submit" id="btnExport"
+                        name="export" value="Export to Excel" style="background-color: green">
+                      <i class="fa fa-file-excel"></i>&nbsp;
+                      Excel Export
+                    </button>
+                </form>
+                
               </div>
             </div>
 
             
           </div>
-        </form>
+        
+       
         <div class="row" style="padding: 2px"></div>
       </div>
       <br>
